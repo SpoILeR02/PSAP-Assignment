@@ -93,7 +93,7 @@ void showRunnersLocation(int position_runnerOne, int position_runnerTwo) {
 	else
 	{
 		cout << setw(position_runnerOne) << right << setfill('-') << 1 << setw(60 - abs(position_runnerOne)) << '-' << endl;
-		cout << setw(position_runnerTwo) << right << setfill('-') << 2 << setw(60 - abs(position_runnerTwo)) << '-' << endl;
+		cout << setw(position_runnerTwo) << right << setfill('-') << 2 << setw(60 - abs(position_runnerTwo)) << '-' << endl << endl;
 	}
 }
 
