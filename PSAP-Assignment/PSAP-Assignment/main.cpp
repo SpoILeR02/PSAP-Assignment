@@ -106,7 +106,7 @@ int main() {
 	while(true)
 	{
 		randomNumber = randomIntegerGenerator();
-		cout << "No: " << randomNumber << endl;
+		cout << "No: " << randomNumber << endl; //just for testing purposes
 		position_runnerOne = calculateRunnerPosition(position_runnerOne, true, randomNumber);
 		showRunnersLocation(position_runnerOne, position_runnerTwo);
 		if (position_runnerOne >= 60)
