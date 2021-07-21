@@ -5,7 +5,8 @@
 
 using namespace std;
 
-int randomIntegerGenerator() {
+int randomIntegerGenerator() //test pls delete later
+{
 	int randomNumber = (rand() % 10) + 1;
 	return randomNumber;
 }
