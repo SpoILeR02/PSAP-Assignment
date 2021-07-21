@@ -16,24 +16,24 @@ int calculateRunnerPosition(int position_runner, bool verifyRunner, int randomNu
 		if (randomNumber >= 1 && randomNumber <= 5)
 		{
 			position_runner += 3;
-			cout << "Runner 1 uses SPRINT and move 3 squares ahead." << endl;
+			cout << "Runner 1 SPRINTS and move 3 squares ahead." << endl;
 		}
 		else if (randomNumber >= 6 && randomNumber <= 7)
 		{
 			position_runner += 1;
-			cout << "Runner 1 uses JOG and move 1 square ahead." << endl;
+			cout << "Runner 1 JOGS and move 1 square ahead." << endl;
 		}
 		else
 		{
 			if (position_runner <= 1)
 			{
 				position_runner = 1;
-				cout << "Runner 1 uses WALK and return to starting point." << endl;
+				cout << "Runner 1 WALKS and return to starting point." << endl;
 			}
 			else
 			{
 				position_runner -= 6;
-				cout << "Runner 1 uses WALK and move 6 squares behind." << endl;
+				cout << "Runner 1 WALKS and move 6 squares behind." << endl;
 			}
 		}
 	}
@@ -42,24 +42,24 @@ int calculateRunnerPosition(int position_runner, bool verifyRunner, int randomNu
 		if (randomNumber >= 1 && randomNumber <= 3)
 		{
 			position_runner += 5;
-			cout << "Runner 2 uses FAST SPRINT and move 5 squares ahead." << endl;
+			cout << "Runner 2 FAST SPRINTS and move 5 squares ahead." << endl;
 		}
 		else if (randomNumber >= 4 && randomNumber <= 5)
 		{
 			position_runner += 3;
-			cout << "Runner 2 uses RUN and move 3 squares ahead." << endl;
+			cout << "Runner 2 RUNS and move 3 squares ahead." << endl;
 		}
 		else if (randomNumber == 6)
 		{
 			if (position_runner <= 1)
 			{
 				position_runner = 1;
-				cout << "Runner 1 uses WALK and return to starting point." << endl;
+				cout << "Runner 1 WALKS and return to starting point." << endl;
 			}
 			else
 			{
 				position_runner -= 2;
-				cout << "Runner 2 uses WALK and move 2 squares behind." << endl;
+				cout << "Runner 2 WALKS and move 2 squares behind." << endl;
 			}
 		}
 		else if (randomNumber >= 7 && randomNumber <= 8)
@@ -67,17 +67,17 @@ int calculateRunnerPosition(int position_runner, bool verifyRunner, int randomNu
 			if (position_runner <= 1)
 			{
 				position_runner = 1;
-				cout << "Runner 1 uses CRAWL and return to starting point." << endl;
+				cout << "Runner 1 CRAWLS and return to starting point." << endl;
 			}
 			else
 			{
 				position_runner -= 4;
-				cout << "Runner 2 uses CRAWL and move 4 squares behind." << endl;
+				cout << "Runner 2 CRAWLS and move 4 squares behind." << endl;
 			}
 		}
 		else
 		{
-			cout << "Runner 2 uses SLEEP and nothing happens." << endl;
+			cout << "Runner 2 SLEEPS and nothing happens." << endl;
 		}
 	}
 
