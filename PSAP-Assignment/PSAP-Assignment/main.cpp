@@ -5,80 +5,80 @@
 
 using namespace std;
 
-int randomIntegerGenerator() //test pls delete later
-{
+int randomIntegerGenerator() {
 	int randomNumber = (rand() % 10) + 1;
 	return randomNumber;
 }
 
-int calculateRunnerOnePosition(int position_runner, int randomNumber) {
-	if (randomNumber >= 1 && randomNumber <= 5)
+int calculateRunnerPosition(int position_runner, bool verifyRunner, int randomNumber) {
+	if (verifyRunner == true)
 	{
-		position_runner += 3;
-		cout << "Runner 1 uses SPRINT and move 3 squares ahead." << endl;
-	}
-	else if (randomNumber >= 6 && randomNumber <= 7)
-	{
-		position_runner += 1;
-		cout << "Runner 1 uses JOG and move 1 square ahead." << endl;
-	}
-	else
-	{
-		if (position_runner <= 1)
+		if (randomNumber >= 1 && randomNumber <= 5)
 		{
-			position_runner = 1;
-			cout << "Runner 1 uses WALK and return to starting point." << endl;
+			position_runner += 3;
+			cout << "Runner 1 uses SPRINT and move 3 squares ahead." << endl;
+		}
+		else if (randomNumber >= 6 && randomNumber <= 7)
+		{
+			position_runner += 1;
+			cout << "Runner 1 uses JOG and move 1 square ahead." << endl;
 		}
 		else
 		{
-			position_runner -= 6;
-			cout << "Runner 1 uses WALK and move 6 squares behind." << endl;
-		}
-	}
-
-	return position_runner;
-}
-
-int calculateRunnerTwoPosition(int position_runner, int randomNumber) {
-	if (randomNumber >= 1 && randomNumber <= 3)
-	{
-		position_runner += 5;
-		cout << "Runner 2 uses FAST SPRINT and move 5 squares ahead." << endl;
-	}
-	else if (randomNumber >= 4 && randomNumber <= 5)
-	{
-		position_runner += 3;
-		cout << "Runner 2 uses RUN and move 3 squares ahead." << endl;
-	}
-	else if (randomNumber == 6)
-	{
-		if (position_runner <= 1)
-		{
-			position_runner = 1;
-			cout << "Runner 1 uses WALK and return to starting point." << endl;
-		}
-		else
-		{
-			position_runner -= 2;
-			cout << "Runner 2 uses WALK and move 2 squares behind." << endl;
-		}
-	}
-	else if (randomNumber >= 7 && randomNumber <= 8)
-	{
-		if (position_runner <= 1)
-		{
-			position_runner = 1;
-			cout << "Runner 1 uses CRAWL and return to starting point." << endl;
-		}
-		else
-		{
-			position_runner -= 4;
-			cout << "Runner 2 uses CRAWL and move 4 squares behind." << endl;
+			if (position_runner <= 1)
+			{
+				position_runner = 1;
+				cout << "Runner 1 uses WALK and return to starting point." << endl;
+			}
+			else
+			{
+				position_runner -= 6;
+				cout << "Runner 1 uses WALK and move 6 squares behind." << endl;
+			}
 		}
 	}
 	else
 	{
-		cout << "Runner 2 uses SLEEP and nothing happens." << endl;
+		if (randomNumber >= 1 && randomNumber <= 3)
+		{
+			position_runner += 5;
+			cout << "Runner 2 uses FAST SPRINT and move 5 squares ahead." << endl;
+		}
+		else if (randomNumber >= 4 && randomNumber <= 5)
+		{
+			position_runner += 3;
+			cout << "Runner 2 uses RUN and move 3 squares ahead." << endl;
+		}
+		else if (randomNumber == 6)
+		{
+			if (position_runner <= 1)
+			{
+				position_runner = 1;
+				cout << "Runner 1 uses WALK and return to starting point." << endl;
+			}
+			else
+			{
+				position_runner -= 2;
+				cout << "Runner 2 uses WALK and move 2 squares behind." << endl;
+			}
+		}
+		else if (randomNumber >= 7 && randomNumber <= 8)
+		{
+			if (position_runner <= 1)
+			{
+				position_runner = 1;
+				cout << "Runner 1 uses CRAWL and return to starting point." << endl;
+			}
+			else
+			{
+				position_runner -= 4;
+				cout << "Runner 2 uses CRAWL and move 4 squares behind." << endl;
+			}
+		}
+		else
+		{
+			cout << "Runner 2 uses SLEEP and nothing happens." << endl;
+		}
 	}
 
 	return position_runner;
@@ -107,7 +107,7 @@ int main() {
 	{
 		randomNumber = randomIntegerGenerator();
 		cout << "No: " << randomNumber << endl;
-		position_runnerOne = calculateRunnerOnePosition(position_runnerOne, randomNumber);
+		position_runnerOne = calculateRunnerPosition(position_runnerOne, true, randomNumber);
 		showRunnersLocation(position_runnerOne, position_runnerTwo);
 		if (position_runnerOne >= 60)
 		{
@@ -117,7 +117,7 @@ int main() {
 
 		randomNumber = randomIntegerGenerator();
 		cout << "No: " << randomNumber << endl;
-		position_runnerTwo = calculateRunnerTwoPosition(position_runnerTwo, randomNumber);
+		position_runnerTwo = calculateRunnerPosition(position_runnerTwo, false, randomNumber);
 		showRunnersLocation(position_runnerOne, position_runnerTwo);
 		if (position_runnerTwo >= 60)
 		{
