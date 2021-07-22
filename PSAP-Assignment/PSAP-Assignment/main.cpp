@@ -88,7 +88,7 @@ void showRunnersLocation(int position_runnerOne, int position_runnerTwo) {
 	if (position_runnerOne == position_runnerTwo && position_runnerOne != 1)
 	{
 		cout << "GOTCHA " << setw(position_runnerOne) << right << setfill(' ') << 1 << setw(60 - abs(position_runnerOne)) << ' ' << endl;
-		cout << "GOTCHA " << setw(position_runnerTwo) << right << setfill(' ') << 2 << setw(60 - abs(position_runnerTwo)) << ' ' << endl;
+		cout << "GOTCHA " << setw(position_runnerTwo) << right << setfill(' ') << 2 << setw(60 - abs(position_runnerTwo)) << ' ' << endl << endl;
 	}
 	else
 	{
@@ -106,7 +106,7 @@ int main() {
 	while(true)
 	{
 		randomNumber = randomIntegerGenerator();
-		cout << "No: " << randomNumber << endl; //just for testing purposes
+		cout << "Runner 1 Rolled Number: " << randomNumber << endl; //just for testing purposes
 		position_runnerOne = calculateRunnerPosition(position_runnerOne, true, randomNumber);
 		showRunnersLocation(position_runnerOne, position_runnerTwo);
 		if (position_runnerOne >= 60)
@@ -116,7 +116,7 @@ int main() {
 		}
 
 		randomNumber = randomIntegerGenerator();
-		cout << "No: " << randomNumber << endl;
+		cout << "Runner 2 Rolled Number: " << randomNumber << endl; //just for testing purposes
 		position_runnerTwo = calculateRunnerPosition(position_runnerTwo, false, randomNumber);
 		showRunnersLocation(position_runnerOne, position_runnerTwo);
 		if (position_runnerTwo >= 60)
