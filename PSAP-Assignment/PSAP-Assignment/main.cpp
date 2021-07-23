@@ -84,6 +84,127 @@ int calculateRunnerPosition(int position_runner, bool verifyRunner, int randomNu
 	return position_runner;
 }
 
+//#3 Edition (Failure), remove /**/ to test.
+/*
+void showRunnersLocation(int position_runnerOne, int position_runnerTwo, bool verifyRunner) {
+	if (position_runnerOne == position_runnerTwo && position_runnerOne != 1)
+	{
+		cout << "GOTCHA!!!" << endl;
+		cout << "GOTCHA!!!" << endl;
+	}
+	
+	// Print hollow rectangle
+	for (int count = 1; count < position_runnerOne; count++)
+	{
+		for (int i = 1; i <= 3; i++)
+		{
+			for (int j = 1; j <= 11; j++)
+			{
+				if (i == 1 || i == 3 || j == 1 || j == 11)
+					cout << "*";
+				else
+					cout << " ";
+			}
+			cout << endl;
+		}
+	}
+
+	// Print rectangle that have number inside (might have some bugs)
+	// Since we might not going to use vertical printing outputs
+	// Might as well as just ignore it
+	if (position_runnerOne == position_runnerTwo && position_runnerOne != 1)
+	{
+		for (int i = 1; i <= 3; i++)
+		{
+			for (int j = 1; j <= 11; j++)
+			{
+				if (i == 1 || i == 3 || j == 1 || j == 11)
+					cout << "*";
+				else
+				{
+					if (verifyRunner == true || verifyRunner == false)
+						if (j == 4)
+							cout << "1";
+					if (j == 7)
+						cout << "2";
+					else
+						cout << " ";
+				}
+			}
+			cout << endl;
+		}
+	}
+	else
+	{
+		for (int i = 1; i <= 3; i++)
+		{
+			for (int j = 1; j <= 11; j++)
+			{
+				if (i == 1 || i == 3 || j == 1 || j == 11)
+					cout << "*";
+				else
+				{
+					if (j == 6)
+						if (verifyRunner == true)
+							cout << 1;
+						else
+							cout << 2;
+					else
+						cout << " ";
+				}
+			}
+			cout << endl;
+		}
+	}
+
+	for (int count = 1; count < 60 - abs(position_runnerOne); count++)
+	{
+		for (int i = 1; i <= 3; i++)
+		{
+			for (int j = 1; j <= 11; j++)
+			{
+				if (i == 1 || i == 3 || j == 1 || j == 11)
+					cout << "*";
+				else
+					cout << " ";
+			}
+			cout << endl;
+		}
+	}
+}
+*/
+
+//#2 Edition (Failure), remove /**/ to test.
+/*
+void showGotchaMessage(int position_runnerOne, int position_runnerTwo) {
+	if (position_runnerOne == position_runnerTwo && position_runnerOne != 1)
+	{
+		cout << "GOTCHA!!!" << endl;
+		cout << "GOTCHA!!!" << endl;
+	}
+}
+
+void showRunnersLocation(int position_runner, bool verifyRunner) {
+	cout << setw(position_runner * 5) << setfill('*') << '*' << setw(60 - abs(position_runner)) << '*' << endl;
+
+	for (int i = 1; i < position_runner; i++)
+	{
+		cout << '*' << setw(3) << right << setfill(' ') << '*';
+	}
+	if (verifyRunner == true)
+		cout << "* " << 1 << " *";
+	else
+		cout << "* " << 1 << " *";
+	for (int i = 1; i < 60 - abs(position_runner); i++)
+	{
+		cout << '*' << setw(3) << right << setfill(' ') << '*';
+	}
+	cout << endl << setw(position_runner * 5) << setfill('*') << '*' << setw(60 - abs(position_runner)) << '*' << endl << endl;
+}
+*/
+
+//#1 Edition (Success), remove /**/ to test.
+
 void showRunnersLocation(int position_runnerOne, int position_runnerTwo) {
 	if (position_runnerOne == position_runnerTwo && position_runnerOne != 1)
 	{
@@ -96,6 +217,7 @@ void showRunnersLocation(int position_runnerOne, int position_runnerTwo) {
 		cout << setw(position_runnerTwo) << right << setfill('-') << 2 << setw(60 - abs(position_runnerTwo)) << '-' << endl << endl;
 	}
 }
+
 
 int main() {
 	int position_runnerOne = 1;
@@ -111,13 +233,28 @@ int main() {
 		randomNumber = randomIntegerGenerator();
 		cout << "Runner 1 Rolled Number: " << randomNumber << endl; //just for testing purposes
 		position_runnerOne = calculateRunnerPosition(position_runnerOne, true, randomNumber);
-		showRunnersLocation(position_runnerOne, position_runnerTwo);
+		showRunnersLocation(position_runnerOne, position_runnerTwo); //#1 Edition (Success)
+		
+		//#2 Edition (Failure), remove /**/ to test.
+		/*
+		showGotchaMessage(position_runnerOne, position_runnerTwo); //#2 Edition (Failure)
+		showRunnersLocation(position_runnerOne, true); //#2 Edition (Failure)
+		*/
+		
+		//showRunnersLocation(position_runnerOne, position_runnerTwo, true); //#3 Edition (Failure)
 
 		randomNumber = randomIntegerGenerator();
 		cout << "Runner 2 Rolled Number: " << randomNumber << endl; //just for testing purposes
 		position_runnerTwo = calculateRunnerPosition(position_runnerTwo, false, randomNumber);
-		showRunnersLocation(position_runnerOne, position_runnerTwo);
+		showRunnersLocation(position_runnerOne, position_runnerTwo); //#1 Edition (Success)
+		
+		//#2 Edition (Failure), remove /**/ to test.
+		/*
+		showGotchaMessage(position_runnerOne, position_runnerTwo); //#2 Edition (Failure)
+		showRunnersLocation(position_runnerTwo, false); //#2 Edition (Failure)
+		*/
 
+		//showRunnersLocation(position_runnerOne, position_runnerTwo, false); ////#3 Edition (Failure)
 
 		if (position_runnerOne >= 60 && position_runnerTwo < 60)
 		{
