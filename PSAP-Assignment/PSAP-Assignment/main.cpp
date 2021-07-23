@@ -25,7 +25,7 @@ int calculateRunnerPosition(int position_runner, bool verifyRunner, int randomNu
 		}
 		else
 		{
-			if (position_runner <= 1)
+			if (position_runner <= 1 || position_runner - 6 <= 1)
 			{
 				position_runner = 1;
 				cout << "Runner 1 WALKS and return to starting point." << endl;
@@ -51,10 +51,10 @@ int calculateRunnerPosition(int position_runner, bool verifyRunner, int randomNu
 		}
 		else if (randomNumber == 6)
 		{
-			if (position_runner <= 1)
+			if (position_runner <= 1 || position_runner - 4 <= 1)
 			{
 				position_runner = 1;
-				cout << "Runner 1 WALKS and return to starting point." << endl;
+				cout << "Runner 2 WALKS and return to starting point." << endl;
 			}
 			else
 			{
@@ -64,10 +64,10 @@ int calculateRunnerPosition(int position_runner, bool verifyRunner, int randomNu
 		}
 		else if (randomNumber >= 7 && randomNumber <= 8)
 		{
-			if (position_runner <= 1)
+			if (position_runner <= 1 || position_runner - 4 <= 1)
 			{
 				position_runner = 1;
-				cout << "Runner 1 CRAWLS and return to starting point." << endl;
+				cout << "Runner 2 CRAWLS and return to starting point." << endl;
 			}
 			else
 			{
@@ -100,30 +100,45 @@ void showRunnersLocation(int position_runnerOne, int position_runnerTwo) {
 int main() {
 	int position_runnerOne = 1;
 	int position_runnerTwo = 1;
+	int timeframe = 1;
 	int randomNumber;
 	srand((unsigned)time(NULL));
 
 	while(true)
 	{
+		cout << "Time Frame: " << timeframe << endl << endl;
+
 		randomNumber = randomIntegerGenerator();
 		cout << "Runner 1 Rolled Number: " << randomNumber << endl; //just for testing purposes
 		position_runnerOne = calculateRunnerPosition(position_runnerOne, true, randomNumber);
 		showRunnersLocation(position_runnerOne, position_runnerTwo);
-		if (position_runnerOne >= 60)
-		{
-			cout << "RUNNER #1 WINS!" << endl;
-			break;
-		}
 
 		randomNumber = randomIntegerGenerator();
 		cout << "Runner 2 Rolled Number: " << randomNumber << endl; //just for testing purposes
 		position_runnerTwo = calculateRunnerPosition(position_runnerTwo, false, randomNumber);
 		showRunnersLocation(position_runnerOne, position_runnerTwo);
-		if (position_runnerTwo >= 60)
+
+
+		if (position_runnerOne >= 60 && position_runnerTwo < 60)
+		{
+			cout << "RUNNER #1 WINS!" << endl;
+			break;
+		}
+		else if (position_runnerOne >= 60 && position_runnerTwo >= 60)
+		{
+			cout << "IT'S A TIE!" << endl;
+			cout << "REMATCH!" << endl;
+			position_runnerOne = 1;
+			position_runnerTwo = 2;
+			continue;
+		}
+		else if (position_runnerTwo >= 60 && position_runnerOne < 60)
 		{
 			cout << "RUNNER #2 WINS!" << endl;
 			break;
 		}
+
+		timeframe++;
 	}
 
 	return 0;
