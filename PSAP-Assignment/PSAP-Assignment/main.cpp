@@ -22,10 +22,8 @@ void sleep(float seconds) {
 void clearConsole() {
 #if defined _WIN32
 	system("cls");
-	//clrscr(); // including header file : conio.h
 #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
 	system("clear");
-	//std::cout<< u8"\033[2J\033[1;1H"; //Using ANSI Escape Sequences 
 #elif defined (__APPLE__)
 	system("clear");
 #endif
@@ -168,39 +166,35 @@ int main() {
 	int position_runnerOne = 1;
 	int position_runnerTwo = 1;
 	int seconds = 0;
-	int moveCounts = 0;
+	int moveCounts = 1;
 	int randomNumber;
 	int actionNumber;
 	srand((unsigned)time(NULL));
 
 	while(true)
 	{
+		seconds += 1;
 		cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl;
 		cout << '|'<< setw(42) << right << setfill(' ') << "TRACK & FIELD RACE" << setw(26) << '|' << endl;
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 		cout << "| Move Counts: " << setw(53) << left << setfill(' ') << moveCounts << '|' << endl;
 
 		randomNumber = randomIntegerGenerator();
-		cout << "| Runner 1 Rolled Number: " << setw(42) << left << setfill(' ') << randomNumber << '|' << endl; //just for testing purposes
+		cout << "| Runner 1 Rolled Number: " << setw(42) << left << setfill(' ') << randomNumber << '|' << endl;
 		actionNumber = verifyRunnersAction(true, randomNumber);
 		position_runnerOne = calculateRunnerPosition(position_runnerOne, actionNumber);
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 		showRunnersLocation(position_runnerOne, position_runnerTwo);
-		seconds += 1;
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
-		cout << "| Time Elapsed: " << setw(52) << left << setfill(' ') << seconds << '|' << endl;
-		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
-		sleep(1.0);
-		
 
 		randomNumber = randomIntegerGenerator();
-		cout << "| Runner 2 Rolled Number: " << setw(42) << left << setfill(' ') << randomNumber << '|' << endl; //just for testing purposes
+		cout << "| Runner 2 Rolled Number: " << setw(42) << left << setfill(' ') << randomNumber << '|' << endl;
 		actionNumber = verifyRunnersAction(false, randomNumber);
 		position_runnerTwo = calculateRunnerPosition(position_runnerTwo, actionNumber);
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 		showRunnersLocation(position_runnerOne, position_runnerTwo);
-		seconds += 1;
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
+
 		cout << "| Time Elapsed: " << setw(52) << left << setfill(' ') << seconds << '|' << endl;
 		cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl << endl;
 		sleep(1.0);
