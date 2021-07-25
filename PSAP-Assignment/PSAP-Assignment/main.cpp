@@ -19,6 +19,18 @@ void sleep(float seconds) {
 	return;
 }
 
+void clearConsole() {
+#if defined _WIN32
+	system("cls");
+	//clrscr(); // including header file : conio.h
+#elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
+	system("clear");
+	//std::cout<< u8"\033[2J\033[1;1H"; //Using ANSI Escape Sequences 
+#elif defined (__APPLE__)
+	system("clear");
+#endif
+}
+
 int verifyRunnersAction(bool verifyRunner, int randomNumber) {
 	int actionNumber;
 
@@ -67,47 +79,47 @@ int calculateRunnerPosition(int position_runner, int actionNumber) {
 	if (actionNumber == 1)
 	{
 		position_runner += 3;
-		cout << "Runner 1 SPRINTS and move 3 squares ahead." << endl;
+		cout << setw(68) << left << setfill(' ') << "| Runner 1 SPRINTS and move 3 squares ahead."  << '|' << endl;
 	}
 	else if (actionNumber == 2)
 	{
 		position_runner += 1;
-		cout << "Runner 1 JOGS and move 1 square ahead." << endl;
+		cout << setw(68) << left << setfill(' ') << "| Runner 1 JOGS and move 1 square ahead." << '|' << endl;
 	}
 	else if (actionNumber == 3)
 	{
 		if (position_runner <= 1 || position_runner - 6 <= 1)
 		{
 			position_runner = 1;
-			cout << "Runner 1 WALKS and return to starting point." << endl;
+			cout << setw(68) << left << setfill(' ') << "| Runner 1 WALKS and return to starting point." << '|' << endl;
 		}
 		else
 		{
 			position_runner -= 6;
-			cout << "Runner 1 WALKS and move 6 squares behind." << endl;
+			cout << setw(68) << left << setfill(' ') << "| Runner 1 WALKS and move 6 squares behind." << '|' << endl;
 		}
 	}
 	else if (actionNumber == 4)
 	{
 		position_runner += 5;
-		cout << "Runner 2 FAST SPRINTS and move 5 squares ahead." << endl;
+		cout << setw(68) << left << setfill(' ') << "| Runner 2 FAST SPRINTS and move 5 squares ahead." << '|' << endl;
 	}
 	else if (actionNumber == 5)
 	{
 		position_runner += 3;
-		cout << "Runner 2 RUNS and move 3 squares ahead." << endl;
+		cout << setw(68) << left << setfill(' ') << "| Runner 2 RUNS and move 3 squares ahead." << '|' << endl;
 	}
 	else if (actionNumber == 6)
 	{
 		if (position_runner <= 1 || position_runner - 4 <= 1)
 		{
 			position_runner = 1;
-			cout << "Runner 2 WALKS and return to starting point." << endl;
+			cout << setw(68) << left << setfill(' ') << "| Runner 2 WALKS and return to starting point." << '|' << endl;
 		}
 		else
 		{
 			position_runner -= 2;
-			cout << "Runner 2 WALKS and move 2 squares behind." << endl;
+			cout << setw(68) << left << setfill(' ') << "| Runner 2 WALKS and move 2 squares behind." << '|' << endl;
 		}
 	}
 	else if (actionNumber == 7)
@@ -115,42 +127,47 @@ int calculateRunnerPosition(int position_runner, int actionNumber) {
 		if (position_runner <= 1 || position_runner - 4 <= 1)
 		{
 			position_runner = 1;
-			cout << "Runner 2 CRAWLS and return to starting point." << endl;
+			cout << setw(68) << left << setfill(' ') << "| Runner 2 CRAWLS and return to starting point." << '|' << endl;
 		}
 		else
 		{
 			position_runner -= 4;
-			cout << "Runner 2 CRAWLS and move 4 squares behind." << endl;
+			cout << setw(68) << left << setfill(' ') << "| Runner 2 CRAWLS and move 4 squares behind." << '|' << endl;
 		}
 	}
 	else
 	{
-		cout << "Runner 2 SLEEPS and nothing happens." << endl;
+		cout << setw(68) << left << setfill(' ') << "| Runner 2 SLEEPS and nothing happens." << '|' << endl;
 	}
 
 	return position_runner;
 }
 
-//#1 Edition (Success), remove /**/ to test.
-
 void showRunnersLocation(int position_runnerOne, int position_runnerTwo) {
 	if (position_runnerOne == position_runnerTwo && position_runnerOne != 1)
 	{
-		cout << "GOTCHA " << setw(position_runnerOne) << right << setfill(' ') << 1 << setw(60 - abs(position_runnerOne)) << ' ' << endl;
-		cout << "GOTCHA " << setw(position_runnerTwo) << right << setfill(' ') << 2 << setw(60 - abs(position_runnerTwo)) << ' ' << endl;
+		cout << setw(68) << left << setfill(' ') << "| GOTCHA!!!" << '|' << endl;
+		cout << setw(68) << left << setfill(' ') << "| GOTCHA!!!" << '|' << endl;
+		cout << '|' << setw(67) << left << setfill('-') << '-' << '|' << endl;
+		cout << "| " << setw(position_runnerOne) << right << setfill(' ') << 1 << setw(65 - abs(position_runnerOne)) << ' ' << " |" << endl;
+		cout << '|' << setw(67) << left << setfill('-') << '-' << '|' << endl;
+		cout << "| " << setw(position_runnerTwo) << right << setfill(' ') << 2 << setw(65 - abs(position_runnerTwo)) << ' ' << " |" << endl;
+		cout << '|' << setw(67) << left << setfill('-') << '-' << '|' << endl;
 	}
 	else
 	{
-		cout << setw(position_runnerOne) << right << setfill('-') << 1 << setw(60 - abs(position_runnerOne)) << '-' << endl;
-		cout << setw(position_runnerTwo) << right << setfill('-') << 2 << setw(60 - abs(position_runnerTwo)) << '-' << endl;
+		cout << "| " << setw(position_runnerOne) << right << setfill('-') << 1 << setw(65 - abs(position_runnerOne)) << '-' << " |" << endl;
+		cout << "| " << setw(position_runnerTwo) << right << setfill('-') << 2 << setw(65 - abs(position_runnerTwo)) << '-' << " |" << endl;
 	}
-}
+	
+	//cout << '|' << setw(67) << left << setfill('-') << '-' << '|' << endl;
 
+}
 
 int main() {
 	int position_runnerOne = 1;
 	int position_runnerTwo = 1;
-	int seconds = 1;
+	int seconds = 0;
 	int moveCounts = 0;
 	int randomNumber;
 	int actionNumber;
@@ -158,29 +175,34 @@ int main() {
 
 	while(true)
 	{
-		cout << setw(60) << setfill('=') << '=' << endl;
-		cout << "Move Counts: " << moveCounts << endl;
-		cout << setw(60) << setfill('=') << '=' << endl;
+		cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl;
+		cout << '|'<< setw(42) << right << setfill(' ') << "TRACK & FIELD RACE" << setw(26) << '|' << endl;
+		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
+		cout << "| Move Counts: " << setw(53) << left << setfill(' ') << moveCounts << '|' << endl;
 
 		randomNumber = randomIntegerGenerator();
-		cout << "Runner 1 Rolled Number: " << randomNumber << endl; //just for testing purposes
+		cout << "| Runner 1 Rolled Number: " << setw(42) << left << setfill(' ') << randomNumber << '|' << endl; //just for testing purposes
 		actionNumber = verifyRunnersAction(true, randomNumber);
 		position_runnerOne = calculateRunnerPosition(position_runnerOne, actionNumber);
-		showRunnersLocation(position_runnerOne, position_runnerTwo); //#1 Edition (Success)
+		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
+		showRunnersLocation(position_runnerOne, position_runnerTwo);
 		seconds += 1;
-		cout << "Time Elapsed: " << seconds << endl;
-		cout << setw(60) << setfill('*') << '*' << endl << endl;
+		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
+		cout << "| Time Elapsed: " << setw(52) << left << setfill(' ') << seconds << '|' << endl;
+		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 		sleep(1.0);
 		
 
 		randomNumber = randomIntegerGenerator();
-		cout << "Runner 2 Rolled Number: " << randomNumber << endl; //just for testing purposes
+		cout << "| Runner 2 Rolled Number: " << setw(42) << left << setfill(' ') << randomNumber << '|' << endl; //just for testing purposes
 		actionNumber = verifyRunnersAction(false, randomNumber);
 		position_runnerTwo = calculateRunnerPosition(position_runnerTwo, actionNumber);
-		showRunnersLocation(position_runnerOne, position_runnerTwo); //#1 Edition (Success)
+		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
+		showRunnersLocation(position_runnerOne, position_runnerTwo);
 		seconds += 1;
-		cout << "Time Elapsed: " << seconds << endl;
-		cout << setw(60) << setfill('*') << '*' << endl << endl;
+		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
+		cout << "| Time Elapsed: " << setw(52) << left << setfill(' ') << seconds << '|' << endl;
+		cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl << endl;
 		sleep(1.0);
 
 
@@ -204,7 +226,8 @@ int main() {
 		}
 
 		moveCounts++;
+		clearConsole();
 	}
-
+	
 	return 0;
 }
