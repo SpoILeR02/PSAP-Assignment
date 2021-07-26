@@ -160,7 +160,7 @@ void Gotcha(int positionRunnerOne, int positionRunnerTwo) {
 	{
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 		cout << setw(68) << left << setfill(' ') << "| GOTCHA!!! Both runners clash together!" << '|' << endl;
-		cout << '|' << setw(67) << left << setfill(' ') << ' ' << '|' << endl;
+		//cout << '|' << setw(67) << left << setfill(' ') << ' ' << '|' << endl;
 		//dont delete code below, might use it in the future
 		/*cout << setw(68) << left << setfill(' ') << "| GOTCHA!!! Both runners clash together!" << '|' << endl;
 		cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
