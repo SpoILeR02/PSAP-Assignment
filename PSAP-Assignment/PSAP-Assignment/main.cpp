@@ -142,9 +142,13 @@ int calculateRunnerPosition(int position_runner, int actionNumber) {
 }
 
 void showRunnersLocation(int runnersPosition, int player) {
-	cout << "| " << setw(runnersPosition) << right << setfill('-') << player << setw(65 - abs(runnersPosition)) << '-' << " |" << endl;
-	//cout << '|' << setw(67) << left << setfill('-') << '-' << '|' << endl;
-
+	cout << "| Runner #" << player << " Current Location: " << setw(38) << left << setfill(' ') << runnersPosition << '|' << endl;
+	if (runnersPosition < 60)
+		cout << "| " << setw(runnersPosition) << right << setfill('-') << player << setw(60 - runnersPosition) << '|' << setw(7) << " |" << endl;
+	else if (runnersPosition == 60)
+		cout << "| " << setw(60) << right << setfill('-') << player << setw(5) << '-' << " |" << endl;
+	else
+		cout << "| " << setw(60) << right << setfill('-') << '|' << setw(abs(60 - runnersPosition)) << player << setw(67 - runnersPosition) << " |" << endl;
 }
 
 void Gotcha(int positionRunnerOne, int positionRunnerTwo) {
@@ -153,30 +157,29 @@ void Gotcha(int positionRunnerOne, int positionRunnerTwo) {
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 		cout << setw(68) << left << setfill(' ') << "| GOTCHA!!! Both runners clash together!" << '|' << endl;
 		cout << setw(68) << left << setfill(' ') << "| GOTCHA!!! Both runners clash together!" << '|' << endl;
-		cout << '|' << setw(67) << left << setfill('-') << '-' << '|' << endl;
+		cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 		cout << "| " << setw(positionRunnerOne) << right << setfill(' ') << 1 << setw(65 - abs(positionRunnerOne)) << ' ' << " |" << endl;
-		cout << '|' << setw(67) << left << setfill('-') << '-' << '|' << endl;
+		cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 		cout << "| " << setw(positionRunnerTwo) << right << setfill(' ') << 2 << setw(65 - abs(positionRunnerTwo)) << ' ' << " |" << endl;
-		cout << '|' << setw(67) << left << setfill('-') << '-' << '|' << endl;
+		cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 	}
 }
 
 int main() {
 	int position_runnerOne = 1;
 	int position_runnerTwo = 1;
-	int seconds = 0;
-	int moveCounts = 1;
+	int match = 1;
+	int seconds = 1;
 	int randomNumber;
 	int actionNumber;
 	srand((unsigned)time(NULL));
 
 	while(true)
 	{
-		seconds += 1;
 		cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl;
 		cout << '|'<< setw(42) << right << setfill(' ') << "TRACK & FIELD RACE" << setw(26) << '|' << endl;
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
-		cout << "| Move Counts: " << setw(53) << left << setfill(' ') << moveCounts << '|' << endl;
+		cout << "| Match Counts: " << setw(52) << left << setfill(' ') << match << '|' << endl;
 
 		randomNumber = randomIntegerGenerator();
 		cout << "| Runner 1 Rolled Number: " << setw(42) << left << setfill(' ') << randomNumber << '|' << endl;
@@ -195,9 +198,10 @@ int main() {
 		Gotcha(position_runnerOne, position_runnerTwo);
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 		
-		cout << "| Time Elapsed: " << setw(52) << left << setfill(' ') << seconds << '|' << endl;
+		cout << "| Time Elapsed (s): " << setw(48) << left << setfill(' ') << seconds << '|' << endl;
 		cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl << endl;
 		sleep(1.0);
+		seconds++;
 
 		if (position_runnerOne >= 60 && position_runnerTwo < 60)
 		{
@@ -207,9 +211,14 @@ int main() {
 		else if (position_runnerOne >= 60 && position_runnerTwo >= 60)
 		{
 			cout << "IT'S A TIE!" << endl;
-			cout << "REMATCH!" << endl;
+			cout << "PAUSE FOR 3 SECONDS BEFORE THE RACE CONTINUE." << endl;
+			sleep(3.0);
+			clearConsole();
+			cout << "REMATCH!!!" << endl << endl;
 			position_runnerOne = 1;
 			position_runnerTwo = 2;
+			seconds += 3;
+			match++;
 			continue;
 		}
 		else if (position_runnerTwo >= 60 && position_runnerOne < 60)
@@ -218,7 +227,6 @@ int main() {
 			break;
 		}
 
-		moveCounts++;
 		clearConsole();
 	}
 	
