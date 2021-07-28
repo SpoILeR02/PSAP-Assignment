@@ -109,7 +109,7 @@ int calculateRunnerPosition(int position_runner, int actionNumber) {
 	}
 	else if (actionNumber == 6)
 	{
-		if (position_runner <= 1 || position_runner - 4 <= 1)
+		if (position_runner <= 1 || position_runner - 2 <= 1)
 		{
 			position_runner = 1;
 			cout << setw(68) << left << setfill(' ') << "| Runner 2 WALKS and return to starting point." << '|' << endl;
