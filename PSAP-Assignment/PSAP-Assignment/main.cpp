@@ -57,75 +57,82 @@ int verifyRunnersAction(bool verifyRunner, int randomNumber) {
 	return actionNumber;
 }
 
-int calculateRunnerPosition(int position_runner, int actionNumber) {
+int calculateRunnerPosition(int positionRunner, int actionNumber) {
 	if (actionNumber == 1)
-		position_runner += 3;
+		positionRunner += 3;
 	else if (actionNumber == 2)
-		position_runner += 1;
+		positionRunner += 1;
 	else if (actionNumber == 3)
 	{
-		if (position_runner - 6 <= 1)
-			position_runner = 1;
+		if (positionRunner - 6 <= 1)
+			positionRunner = 1;
 		else
-			position_runner -= 6;
+			positionRunner -= 6;
 	}
 	else if (actionNumber == 4)
-		position_runner += 5;
+		positionRunner += 5;
 	else if (actionNumber == 5)
-		position_runner += 3;
+		positionRunner += 3;
 	else if (actionNumber == 6)
 	{
-		if (position_runner - 2 <= 1)
-			position_runner = 1;
+		if (positionRunner - 2 <= 1)
+			positionRunner = 1;
 		else
-			position_runner -= 2;
+			positionRunner -= 2;
 	}
 	else if (actionNumber == 7)
 	{
-		if (position_runner - 4 <= 1)
-			position_runner = 1;
+		if (positionRunner - 4 <= 1)
+			positionRunner = 1;
 		else
-			position_runner -= 4;
+			positionRunner -= 4;
 	}
 	else
-		position_runner = position_runner;
+		positionRunner = positionRunner;
 
-	return position_runner;
+	return positionRunner;
+}
+
+void programTitle(int match) {
+	cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl;
+	cout << '|' << setw(42) << right << setfill(' ') << "TRACK & FIELD RACE" << setw(26) << '|' << endl;
+	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
+	cout << "| Match No. " << setw(56) << left << setfill(' ') << match << '|' << endl;
 }
 
 void showRolledNumber(int randomNumber) {
 	cout << "| Runner 1 Rolled Number: " << setw(42) << left << setfill(' ') << randomNumber << '|' << endl;
 }
 
-void showCurrentAction(int positionRunner, int player) {
-	cout << "| Runner #" << player << " Current Location: " << setw(38) << left << setfill(' ') << positionRunner << '|' << endl;
-}
-
-void showActionMessage(int position_runner, int actionNumber) {
+void showActionMessage(int runnersPosition, int actionNumber) {
 	if (actionNumber == 1)
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 1 SPRINTS and move 3 squares ahead." << '|' << endl;
 	else if (actionNumber == 2)
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 1 JOGS and move 1 square ahead." << '|' << endl;
-	else if (actionNumber == 3 && position_runner == 1)
+	else if (actionNumber == 3 && runnersPosition == 1)
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 1 WALKS and return to starting point." << '|' << endl;
-	else if (actionNumber == 3 && position_runner != 1)
+	else if (actionNumber == 3 && runnersPosition != 1)
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 1 WALKS and move 6 squares behind." << '|' << endl;
 	else if (actionNumber == 4)
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 FAST SPRINTS and move 5 squares ahead." << '|' << endl;
 	else if (actionNumber == 5)
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 RUNS and move 3 squares ahead." << '|' << endl;
-	else if (actionNumber == 6 && position_runner == 1)
+	else if (actionNumber == 6 && runnersPosition == 1)
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 WALKS and return to starting point." << '|' << endl;
-	else if (actionNumber == 6 && position_runner != 1)
+	else if (actionNumber == 6 && runnersPosition != 1)
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 WALKS and move 2 squares behind." << '|' << endl;
-	else if (actionNumber == 7 && position_runner == 1)
+	else if (actionNumber == 7 && runnersPosition == 1)
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 CRAWLS and return to starting point." << '|' << endl;
-	else if (actionNumber == 7 && position_runner != 1)
+	else if (actionNumber == 7 && runnersPosition != 1)
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 CRAWLS and move 4 squares behind." << '|' << endl;
 	else
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 SLEEPS and nothing happens." << '|' << endl;
 
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
+}
+
+void showCurrentAction(int positionRunner, int player) {
+	cout << "| Runner #" << player << " Current Location: " << setw(38) << left << setfill(' ') << positionRunner << '|' << endl;
 }
 
 void showRunnersLocation(int runnersPosition, int player) {
@@ -159,13 +166,6 @@ int showTimeElapse(int seconds) {
 	seconds++;
 
 	return seconds;
-}
-
-void programTitle(int match) {
-	cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl;
-	cout << '|' << setw(42) << right << setfill(' ') << "TRACK & FIELD RACE" << setw(26) << '|' << endl;
-	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
-	cout << "| Match No. " << setw(56) << left << setfill(' ') << match << '|' << endl;
 }
 
 int main() {
