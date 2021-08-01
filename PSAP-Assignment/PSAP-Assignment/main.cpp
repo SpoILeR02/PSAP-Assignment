@@ -169,51 +169,52 @@ int showTimeElapse(int seconds) {
 }
 
 int main() {
-	int positionRunnerOne = 1;
-	int positionRunnerTwo = 1;
 	int match = 1;
+	int randomNumber[2];
+	int actionNumber[2];
+	int positionRunner[2] = { 60, 60 };
 	int seconds = 1;
 	srand((unsigned)time(NULL));
 
 	while (true)
 	{
-		int randomNumberOne = randomIntegerGenerator();
-		int actionNumberRunnerOne = verifyRunnersAction(true, randomNumberOne);
-		positionRunnerOne = calculateRunnerPosition(positionRunnerOne, actionNumberRunnerOne);
-		int randomNumberTwo = randomIntegerGenerator();
-		int actionNumberRunnerTwo = verifyRunnersAction(false, randomNumberTwo);
-		positionRunnerTwo = calculateRunnerPosition(positionRunnerTwo, actionNumberRunnerTwo);
+		randomNumber[0] = randomIntegerGenerator();
+		actionNumber[0] = verifyRunnersAction(true, randomNumber[0]);
+		positionRunner[0] = calculateRunnerPosition(positionRunner[0], actionNumber[0]);
+		randomNumber[1] = randomIntegerGenerator();
+		actionNumber[1] = verifyRunnersAction(false, randomNumber[1]);
+		positionRunner[1] = calculateRunnerPosition(positionRunner[1], actionNumber[1]);
 
 		programTitle(match);
-		showRolledNumber(randomNumberOne);
-		showActionMessage(positionRunnerOne, actionNumberRunnerOne);
-		showRolledNumber(randomNumberTwo);
-		showActionMessage(positionRunnerTwo, actionNumberRunnerTwo);
-		showCurrentAction(positionRunnerOne, 1);
-		showCurrentAction(positionRunnerTwo, 2);
-		showTrack(positionRunnerOne, positionRunnerTwo);
+		showRolledNumber(randomNumber[0]);
+		showActionMessage(positionRunner[0], actionNumber[0]);
+		showRolledNumber(randomNumber[1]);
+		showActionMessage(positionRunner[1], actionNumber[1]);
+		showCurrentAction(positionRunner[0], 1);
+		showCurrentAction(positionRunner[1], 2);
+		showTrack(positionRunner[0], positionRunner[1]);
 
 		seconds = showTimeElapse(seconds);
 		
 
-		if (positionRunnerOne >= 60 && positionRunnerTwo < 60)
+		if (positionRunner[0] >= 60 && positionRunner[1] < 60)
 		{
 			cout << "RUNNER #1 WINS!" << endl;
 			break;
 		}
-		else if (positionRunnerOne >= 60 && positionRunnerTwo >= 60)
+		else if (positionRunner[0] >= 60 && positionRunner[1] >= 60)
 		{
 			cout << "IT'S A TIE!" << endl;
 			cout << "PAUSE FOR 3 SECONDS BEFORE THE RACE CONTINUE." << endl;
 			sleep(3.0);
 			clearConsole();
 			cout << "REMATCH!!!" << endl << endl;
-			positionRunnerOne = 1;
-			positionRunnerTwo = 2;
+			positionRunner[0] = 1;
+			positionRunner[1] = 1;
 			match++;
 			continue;
 		}
-		else if (positionRunnerTwo >= 60 && positionRunnerOne < 60)
+		else if (positionRunner[1] >= 60 && positionRunner[0] < 60)
 		{
 			cout << "RUNNER #2 WINS!" << endl;
 			break;
