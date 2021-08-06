@@ -5,6 +5,8 @@
 
 using namespace std;
 
+const int finishingLine = 60;
+
 int randomIntegerGenerator() {
 	int randomNumber = (rand() % 10) + 1;
 	return randomNumber;
@@ -29,10 +31,10 @@ void clearConsole() {
 #endif
 }
 
-int verifyRunnersAction(bool verifyRunner, int randomNumber) {
+int verifyRunnersAction(int verifyRunner, int randomNumber) {
 	int actionNumber;
 
-	if (verifyRunner == true) {
+	if (verifyRunner == 0) {
 		if (randomNumber >= 1 && randomNumber <= 5)
 			actionNumber = 1;
 		else if (randomNumber >= 6 && randomNumber <= 7)
@@ -148,14 +150,14 @@ void showActionMessage(int runnersPosition, int actionNumber) {
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 }
 
-void showCurrentAction(int positionRunner, int player) {
+void showCurrentLocation(int positionRunner, int player) {
 	cout << "| Runner #" << player << " Current Location: " << setw(38) << left << setfill(' ') << positionRunner << '|' << endl;
 }
 
 void showRunnersLocation(int runnersPosition, int player) {
-	if (runnersPosition < 60)
+	if (runnersPosition < finishingLine)
 		cout << "| " << setw(runnersPosition) << right << setfill(' ') << player << setw(60 - runnersPosition) << '|' << setw(7) << " |" << endl;
-	else if (runnersPosition == 60)
+	else if (runnersPosition == finishingLine)
 		cout << "| " << setw(60) << right << setfill(' ') << player << setw(5) << ' ' << " |" << endl;
 	else
 		cout << "| " << setw(60) << right << setfill(' ') << '|' << setw(abs(60 - runnersPosition)) << player << setw(67 - runnersPosition) << " |" << endl;
@@ -189,37 +191,39 @@ int main() {
 	int match = 1;
 	int randomNumber[2];
 	int actionNumber[2];
+	int players[2] = { 1, 2 };
 	int positionRunner[2] = { 1, 1 };
 	int seconds = 1;
 	srand((unsigned)time(NULL));
 
 	while (true)
 	{
-		randomNumber[0] = randomIntegerGenerator();
-		actionNumber[0] = verifyRunnersAction(true, randomNumber[0]);
-		positionRunner[0] = calculateRunnerPosition(positionRunner[0], actionNumber[0]);
-		randomNumber[1] = randomIntegerGenerator();
-		actionNumber[1] = verifyRunnersAction(false, randomNumber[1]);
-		positionRunner[1] = calculateRunnerPosition(positionRunner[1], actionNumber[1]);
-
+		for (int i = 0; i <= 1; i++)
+		{
+			randomNumber[i] = randomIntegerGenerator();
+			actionNumber[i] = verifyRunnersAction(i, randomNumber[i]);
+			positionRunner[i] = calculateRunnerPosition(positionRunner[i], actionNumber[i]);
+		}
 		programTitle(match);
-		showRolledNumber(randomNumber[0], 1);
-		showActionMessage(positionRunner[0], actionNumber[0]);
-		showRolledNumber(randomNumber[1], 2);
-		showActionMessage(positionRunner[1], actionNumber[1]);
-		showCurrentAction(positionRunner[0], 1);
-		showCurrentAction(positionRunner[1], 2);
+		for (int j = 0; j <= 1; j++)
+		{
+			showRolledNumber(randomNumber[j], players[j]);
+			showActionMessage(positionRunner[j], actionNumber[j]);
+		}
+		for (int k = 0; k <= 1; k++)
+		{
+			showCurrentLocation(positionRunner[k], players[k]);
+		}
 		showTrack(positionRunner[0], positionRunner[1]);
 
 		seconds = showTimeElapse(seconds);
 		
-
-		if (positionRunner[0] >= 60 && positionRunner[1] < 60)
+		if (positionRunner[0] >= finishingLine && positionRunner[1] < finishingLine)
 		{
 			cout << "RUNNER #1 WINS!" << endl;
 			break;
 		}
-		else if (positionRunner[0] >= 60 && positionRunner[1] >= 60)
+		else if (positionRunner[0] >= finishingLine && positionRunner[1] >= finishingLine)
 		{
 			cout << "IT'S A TIE!" << endl;
 			cout << "PAUSE FOR 3 SECONDS BEFORE THE RACE CONTINUE." << endl;
@@ -231,7 +235,7 @@ int main() {
 			match++;
 			continue;
 		}
-		else if (positionRunner[1] >= 60 && positionRunner[0] < 60)
+		else if (positionRunner[1] >= finishingLine && positionRunner[0] < finishingLine)
 		{
 			cout << "RUNNER #2 WINS!" << endl;
 			break;
