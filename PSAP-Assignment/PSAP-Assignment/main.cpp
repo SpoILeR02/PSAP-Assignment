@@ -185,7 +185,7 @@ void main() {
 	int randomNumber[2];
 	int actionNumber[2];
 	int players[2] = { 1, 2 };
-	int positionRunner[2] = { 60, 60 };
+	int positionRunner[2] = { 1, 1 };
 	int seconds = 0;
 	srand((unsigned)time(NULL));
 
