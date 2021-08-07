@@ -18,7 +18,6 @@ void sleep(float seconds) {
 	float secondsAhead = seconds * CLOCKS_PER_SEC;
 	// do nothing until the elapsed time has passed.
 	while (clock() < startClock + secondsAhead);
-	return;
 }
 
 void clearConsole() {
@@ -69,10 +68,7 @@ int calculateRunnerPosition(int positionRunner, int actionNumber) {
 		positionRunner += 1;
 		break;
 	case 3:
-		if (positionRunner - 6 <= 1)
-			positionRunner = 1;
-		else
-			positionRunner -= 6;
+		positionRunner -= 6;
 		break;
 	case 4:
 		positionRunner += 5;
@@ -81,20 +77,17 @@ int calculateRunnerPosition(int positionRunner, int actionNumber) {
 		positionRunner += 3;
 		break;
 	case 6:
-		if (positionRunner - 2 <= 1)
-			positionRunner = 1;
-		else
-			positionRunner -= 2;
+		positionRunner -= 2;
 		break;
 	case 7:
-		if (positionRunner - 4 <= 1)
-			positionRunner = 1;
-		else
-			positionRunner -= 4;
+		positionRunner -= 4;
 		break;
 	default:
 		positionRunner = positionRunner;
 	}
+	
+	if (positionRunner < 1)
+		positionRunner = 1;
 	
 	return positionRunner;
 }
@@ -163,7 +156,8 @@ void showRunnersLocation(int runnersPosition, int player) {
 		cout << "| " << setw(60) << right << setfill(' ') << '|' << setw(abs(60 - runnersPosition)) << player << setw(67 - runnersPosition) << " |" << endl;
 }
 
-void showTrack(int positionRunnerOne, int positionRunnerTwo) {
+void showTrack(int positionRunnerOne, int positionRunnerTwo, int seconds) {
+	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 	cout << '|' << setw(67) << left << setfill(' ') << " Track:" << '|' << endl;
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 	showRunnersLocation(positionRunnerOne, 1);
@@ -171,7 +165,7 @@ void showTrack(int positionRunnerOne, int positionRunnerTwo) {
 	showRunnersLocation(positionRunnerTwo, 2);
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
-	if (positionRunnerOne == positionRunnerTwo && positionRunnerOne != 1)
+	if (positionRunnerOne == positionRunnerTwo && seconds > 1)
 	{
 		cout << "| " << setw(66) << left << setfill(' ') << "GOTCHA!!! Both runners clash together!" << '|' << endl;
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
@@ -179,22 +173,37 @@ void showTrack(int positionRunnerOne, int positionRunnerTwo) {
 }
 
 int showTimeElapse(int seconds) {
-	cout << "| Time Elapsed (s): " << setw(48) << left << setfill(' ') << seconds << '|' << endl;
+	cout << "| Time Elapsed(s): " << setw(49) << left << setfill(' ') << seconds << '|' << endl;
 	cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl << endl;
-	sleep(1.0);
 	seconds++;
 
 	return seconds;
 }
 
-int main() {
+void main() {
 	int match = 1;
 	int randomNumber[2];
 	int actionNumber[2];
 	int players[2] = { 1, 2 };
-	int positionRunner[2] = { 1, 1 };
-	int seconds = 1;
+	int positionRunner[2] = { 60, 60 };
+	int seconds = 0;
 	srand((unsigned)time(NULL));
+
+	programTitle(match);
+	for (int n = 0; n <= 1; n++)
+	{
+		showCurrentLocation(positionRunner[n], players[n]);
+	}
+	showTrack(positionRunner[0], positionRunner[1], seconds);
+	seconds = showTimeElapse(seconds);
+	for (int m = 3; m >= 1; m--)
+	{
+		cout << "Countdown... Race starting in " << m << " second(s)..." << endl << endl;
+		sleep(1.0);
+	}
+	cout << "BANG!! GO!!!" << endl;
+	sleep(1.0);
+	clearConsole();
 
 	while (true)
 	{
@@ -214,22 +223,27 @@ int main() {
 		{
 			showCurrentLocation(positionRunner[k], players[k]);
 		}
-		showTrack(positionRunner[0], positionRunner[1]);
+		showTrack(positionRunner[0], positionRunner[1], seconds);
 
 		seconds = showTimeElapse(seconds);
+		sleep(1.0);
 		
 		if (positionRunner[0] >= finishingLine && positionRunner[1] < finishingLine)
 		{
-			cout << "RUNNER #1 WINS!" << endl;
+			cout << "RUNNER #1 WON THE MATCH!!!" << endl;
 			break;
 		}
 		else if (positionRunner[0] >= finishingLine && positionRunner[1] >= finishingLine)
 		{
-			cout << "IT'S A TIE!" << endl;
-			cout << "PAUSE FOR 3 SECONDS BEFORE THE RACE CONTINUE." << endl;
-			sleep(3.0);
+			cout << "IT'S A TIE!" << endl << endl;
+			for (int l = 3; l >= 1; l--)
+			{
+				cout << "Countdown... Rematch in " << l << " second(s)..." << endl << endl;
+				sleep(1.0);
+			}
+			cout << "REMATCH!!!"<< endl;
+			sleep(1.0);
 			clearConsole();
-			cout << "REMATCH!!!" << endl << endl;
 			positionRunner[0] = 1;
 			positionRunner[1] = 1;
 			match++;
@@ -237,12 +251,10 @@ int main() {
 		}
 		else if (positionRunner[1] >= finishingLine && positionRunner[0] < finishingLine)
 		{
-			cout << "RUNNER #2 WINS!" << endl;
+			cout << "RUNNER #2 WON THE MATCH!!!" << endl;
 			break;
 		}
 
 		clearConsole();
 	}
-
-	return 0;
 }
