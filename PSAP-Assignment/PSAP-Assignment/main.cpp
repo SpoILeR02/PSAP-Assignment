@@ -180,7 +180,7 @@ int showTimeElapse(int seconds) {
 	return seconds;
 }
 
-void main() {
+int main() {
 	int match = 1;
 	int randomNumber[2];
 	int actionNumber[2];
@@ -257,4 +257,6 @@ void main() {
 
 		clearConsole();
 	}
+
+	return 0;
 }
