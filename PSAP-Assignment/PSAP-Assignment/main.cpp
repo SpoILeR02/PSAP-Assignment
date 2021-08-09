@@ -6,6 +6,7 @@
 using namespace std;
 
 const int finishingLine = 60;
+const int runners[2] = { 1, 2 };
 
 int randomIntegerGenerator() {
 	int randomNumber = (rand() % 10) + 1;
@@ -99,8 +100,8 @@ void programTitle(int match) {
 	cout << "| Match No. " << setw(56) << left << setfill(' ') << match << '|' << endl;
 }
 
-void showRolledNumber(int randomNumber, int player) {
-	cout << "| Runner " << player << " Rolled Number : " << setw(41) << left << setfill(' ') << randomNumber << '|' << endl;
+void showRolledNumber(int randomNumber, int runner) {
+	cout << "| Runner " << runner << " Rolled Number : " << setw(41) << left << setfill(' ') << randomNumber << '|' << endl;
 }
 
 void showActionMessage(int runnersPosition, int actionNumber) {
@@ -143,17 +144,17 @@ void showActionMessage(int runnersPosition, int actionNumber) {
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 }
 
-void showCurrentLocation(int positionRunner, int player) {
-	cout << "| Runner #" << player << " Current Location: " << setw(38) << left << setfill(' ') << positionRunner << '|' << endl;
+void showCurrentLocation(int positionRunner, int runner) {
+	cout << "| Runner #" << runner << " Current Location: " << setw(38) << left << setfill(' ') << positionRunner << '|' << endl;
 }
 
-void showRunnersLocation(int runnersPosition, int player) {
+void showRunnersLocation(int runnersPosition, int runner) {
 	if (runnersPosition < finishingLine)
-		cout << "| " << setw(runnersPosition) << right << setfill(' ') << player << setw(60 - runnersPosition) << '|' << setw(7) << " |" << endl;
+		cout << "| " << setw(runnersPosition) << right << setfill(' ') << runner << setw(60 - runnersPosition) << '|' << setw(7) << " |" << endl;
 	else if (runnersPosition == finishingLine)
-		cout << "| " << setw(60) << right << setfill(' ') << player << setw(5) << ' ' << " |" << endl;
+		cout << "| " << setw(60) << right << setfill(' ') << runner << setw(5) << ' ' << " |" << endl;
 	else
-		cout << "| " << setw(60) << right << setfill(' ') << '|' << setw(abs(60 - runnersPosition)) << player << setw(67 - runnersPosition) << " |" << endl;
+		cout << "| " << setw(60) << right << setfill(' ') << '|' << setw(abs(60 - runnersPosition)) << runner << setw(67 - runnersPosition) << " |" << endl;
 }
 
 void showTrack(int positionRunnerOne, int positionRunnerTwo, int seconds) {
@@ -184,7 +185,6 @@ int main() {
 	int match = 1;
 	int randomNumber[2];
 	int actionNumber[2];
-	int players[2] = { 1, 2 };
 	int positionRunner[2] = { 1, 1 };
 	int seconds = 0;
 	srand((unsigned)time(NULL));
@@ -192,7 +192,7 @@ int main() {
 	programTitle(match);
 	for (int n = 0; n <= 1; n++)
 	{
-		showCurrentLocation(positionRunner[n], players[n]);
+		showCurrentLocation(positionRunner[n], runners[n]);
 	}
 	showTrack(positionRunner[0], positionRunner[1], seconds);
 	seconds = showTimeElapse(seconds);
@@ -216,12 +216,12 @@ int main() {
 		programTitle(match);
 		for (int j = 0; j <= 1; j++)
 		{
-			showRolledNumber(randomNumber[j], players[j]);
+			showRolledNumber(randomNumber[j], runners[j]);
 			showActionMessage(positionRunner[j], actionNumber[j]);
 		}
 		for (int k = 0; k <= 1; k++)
 		{
-			showCurrentLocation(positionRunner[k], players[k]);
+			showCurrentLocation(positionRunner[k], runners[k]);
 		}
 		showTrack(positionRunner[0], positionRunner[1], seconds);
 
