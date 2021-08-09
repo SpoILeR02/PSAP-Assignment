@@ -201,7 +201,7 @@ int main() {
 		cout << "Countdown... Race starting in " << m << " second(s)..." << endl << endl;
 		sleep(1.0);
 	}
-	cout << "BANG!!\n AND AWAY THEY GO!!!" << endl;
+	cout << "BANG!!\nAND AWAY THEY GO!!!" << endl;
 	sleep(1.0);
 	clearConsole();
 
