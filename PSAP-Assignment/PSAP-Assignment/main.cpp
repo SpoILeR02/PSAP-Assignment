@@ -13,7 +13,7 @@ int randomIntegerGenerator() {
 }
 
 // This function works on macOS as well
-void sleep(float seconds) {
+void delay(float seconds) {
 	clock_t startClock = clock();
 	float secondsAhead = seconds * CLOCKS_PER_SEC;
 	// do nothing until the elapsed time has passed.
@@ -199,10 +199,10 @@ int main() {
 	for (int m = 3; m >= 1; m--)
 	{
 		cout << "Countdown... Race starting in " << m << " second(s)..." << endl << endl;
-		sleep(1.0);
+		delay(1.0);
 	}
 	cout << "BANG!!\nAND AWAY THEY GO!!!" << endl;
-	sleep(1.0);
+	delay(1.0);
 	clearConsole();
 
 	while (true)
@@ -226,7 +226,7 @@ int main() {
 		showTrack(positionRunner[0], positionRunner[1], seconds);
 
 		seconds = showTimeElapse(seconds);
-		sleep(1.0);
+		delay(1.0);
 		
 		if (positionRunner[0] >= finishingLine && positionRunner[1] < finishingLine)
 		{
@@ -239,10 +239,10 @@ int main() {
 			for (int l = 3; l >= 1; l--)
 			{
 				cout << "Countdown... Rematch in " << l << " second(s)..." << endl << endl;
-				sleep(1.0);
+				delay(1.0);
 			}
 			cout << "REMATCH!!!"<< endl;
-			sleep(1.0);
+			delay(1.0);
 			clearConsole();
 			positionRunner[0] = 1;
 			positionRunner[1] = 1;
