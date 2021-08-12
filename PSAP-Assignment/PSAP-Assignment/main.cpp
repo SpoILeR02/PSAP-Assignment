@@ -5,10 +5,92 @@
 
 using namespace std;
 
+int randomInteger();
+int timeElapse(int);
+int runnersAction(int, int);
+int calculatePosition(int, int);
+void delay(float);
+void clearConsole();
+void programTitle(int);
+void showPosition(int, int);
+void showTrack(int, int, int);
+void actionMessage(int, int, int, int);
+
 const int finishingLine = 60;
 const int runners[2] = { 1, 2 };
 
-int randomIntegerGenerator() {
+int main() {
+	int match = 1;
+	int randomNumber[2];
+	int actionNumber[2];
+	int positionRunner[2] = { 1, 1 };
+	int seconds = 0;
+	srand((unsigned)time(NULL));
+
+	programTitle(match);
+	showTrack(positionRunner[0], positionRunner[1], seconds);
+	seconds = timeElapse(seconds);
+	for (int l = 3; l >= 1; l--)
+	{
+		cout << "Countdown... Race starting in " << l << " second(s)..." << endl << endl;
+		delay(1.0);
+	}
+	cout << "BANG!!\n\nAND AWAY THEY GO!!!" << endl;
+	delay(1.0);
+	clearConsole();
+
+	while (true)
+	{
+		for (int i = 0; i <= 1; i++)
+		{
+			randomNumber[i] = randomInteger();
+			actionNumber[i] = runnersAction(i, randomNumber[i]);
+			positionRunner[i] = calculatePosition(positionRunner[i], actionNumber[i]);
+		}
+		programTitle(match);
+		for (int j = 0; j <= 1; j++)
+		{
+			actionMessage(randomNumber[j], runners[j], positionRunner[j], actionNumber[j]);
+		}
+		showTrack(positionRunner[0], positionRunner[1], seconds);
+
+		seconds = timeElapse(seconds);
+		delay(1.0);
+
+		if (positionRunner[0] >= finishingLine && positionRunner[1] < finishingLine)
+		{
+			cout << "RUNNER #1 WON THE MATCH!!!" << endl;
+			break;
+		}
+		else if (positionRunner[0] >= finishingLine && positionRunner[1] >= finishingLine)
+		{
+			cout << "IT'S A TIE!" << endl << endl;
+			for (int k = 3; k >= 1; k--)
+			{
+				cout << "Countdown... Rematch in " << k << " second(s)..." << endl << endl;
+				delay(1.0);
+			}
+			cout << "REMATCH!!!" << endl;
+			delay(1.0);
+			clearConsole();
+			positionRunner[0] = 1;
+			positionRunner[1] = 1;
+			match++;
+			continue;
+		}
+		else if (positionRunner[1] >= finishingLine && positionRunner[0] < finishingLine)
+		{
+			cout << "RUNNER #2 WON THE MATCH!!!" << endl;
+			break;
+		}
+
+		clearConsole();
+	}
+
+	return 0;
+}
+
+int randomInteger() {
 	int randomNumber = (rand() % 10) + 1;
 	return randomNumber;
 }
@@ -31,7 +113,7 @@ void clearConsole() {
 #endif
 }
 
-int verifyRunnersAction(int verifyRunner, int randomNumber) {
+int runnersAction(int verifyRunner, int randomNumber) {
 	int actionNumber;
 
 	if (verifyRunner == 0) {
@@ -59,7 +141,7 @@ int verifyRunnersAction(int verifyRunner, int randomNumber) {
 	return actionNumber;
 }
 
-int calculateRunnerPosition(int positionRunner, int actionNumber) {
+int calculatePosition(int positionRunner, int actionNumber) {
 	switch (actionNumber)
 	{
 	case 1:
@@ -100,11 +182,8 @@ void programTitle(int match) {
 	cout << "| Match No. " << setw(56) << left << setfill(' ') << match << '|' << endl;
 }
 
-void showRolledNumber(int randomNumber, int runner) {
+void actionMessage(int randomNumber, int runner, int runnersPosition, int actionNumber) {
 	cout << "| Runner " << runner << " Rolled Number : " << setw(41) << left << setfill(' ') << randomNumber << '|' << endl;
-}
-
-void showActionMessage(int runnersPosition, int actionNumber) {
 	switch (actionNumber)
 	{
 	case 1:
@@ -140,15 +219,10 @@ void showActionMessage(int runnersPosition, int actionNumber) {
 	default:
 		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 SLEEPS and nothing happens." << '|' << endl;
 	}
-
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 }
 
-void showCurrentLocation(int positionRunner, int runner) {
-	cout << "| Runner #" << runner << " Current Location: " << setw(38) << left << setfill(' ') << positionRunner << '|' << endl;
-}
-
-void showRunnersLocation(int runnersPosition, int runner) {
+void showPosition(int runnersPosition, int runner) {
 	if (runnersPosition < finishingLine)
 		cout << "| " << setw(runnersPosition) << right << setfill(' ') << runner << setw(60 - runnersPosition) << '|' << setw(7) << " |" << endl;
 	else if (runnersPosition == finishingLine)
@@ -158,12 +232,14 @@ void showRunnersLocation(int runnersPosition, int runner) {
 }
 
 void showTrack(int positionRunnerOne, int positionRunnerTwo, int seconds) {
+	cout << "| Runner #" << runners[0] << " Current Position: " << setw(38) << left << setfill(' ') << positionRunnerOne << '|' << endl;
+	cout << "| Runner #" << runners[1] << " Current Position: " << setw(38) << left << setfill(' ') << positionRunnerTwo << '|' << endl;
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 	cout << '|' << setw(67) << left << setfill(' ') << " Track:" << '|' << endl;
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
-	showRunnersLocation(positionRunnerOne, 1);
+	showPosition(positionRunnerOne, runners[0]);
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
-	showRunnersLocation(positionRunnerTwo, 2);
+	showPosition(positionRunnerTwo, runners[1]);
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 	if (positionRunnerOne == positionRunnerTwo && seconds > 1)
@@ -173,90 +249,10 @@ void showTrack(int positionRunnerOne, int positionRunnerTwo, int seconds) {
 	}
 }
 
-int showTimeElapse(int seconds) {
+int timeElapse(int seconds) {
 	cout << "| Time Elapsed(s): " << setw(49) << left << setfill(' ') << seconds << '|' << endl;
 	cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl << endl;
 	seconds++;
 
 	return seconds;
-}
-
-int main() {
-	int match = 1;
-	int randomNumber[2];
-	int actionNumber[2];
-	int positionRunner[2] = { 1, 1 };
-	int seconds = 0;
-	srand((unsigned)time(NULL));
-
-	programTitle(match);
-	for (int n = 0; n <= 1; n++)
-	{
-		showCurrentLocation(positionRunner[n], runners[n]);
-	}
-	showTrack(positionRunner[0], positionRunner[1], seconds);
-	seconds = showTimeElapse(seconds);
-	for (int m = 3; m >= 1; m--)
-	{
-		cout << "Countdown... Race starting in " << m << " second(s)..." << endl << endl;
-		delay(1.0);
-	}
-	cout << "BANG!!\n\nAND AWAY THEY GO!!!" << endl;
-	delay(1.0);
-	clearConsole();
-
-	while (true)
-	{
-		for (int i = 0; i <= 1; i++)
-		{
-			randomNumber[i] = randomIntegerGenerator();
-			actionNumber[i] = verifyRunnersAction(i, randomNumber[i]);
-			positionRunner[i] = calculateRunnerPosition(positionRunner[i], actionNumber[i]);
-		}
-		programTitle(match);
-		for (int j = 0; j <= 1; j++)
-		{
-			showRolledNumber(randomNumber[j], runners[j]);
-			showActionMessage(positionRunner[j], actionNumber[j]);
-		}
-		for (int k = 0; k <= 1; k++)
-		{
-			showCurrentLocation(positionRunner[k], runners[k]);
-		}
-		showTrack(positionRunner[0], positionRunner[1], seconds);
-
-		seconds = showTimeElapse(seconds);
-		delay(1.0);
-		
-		if (positionRunner[0] >= finishingLine && positionRunner[1] < finishingLine)
-		{
-			cout << "RUNNER #1 WON THE MATCH!!!" << endl;
-			break;
-		}
-		else if (positionRunner[0] >= finishingLine && positionRunner[1] >= finishingLine)
-		{
-			cout << "IT'S A TIE!" << endl << endl;
-			for (int l = 3; l >= 1; l--)
-			{
-				cout << "Countdown... Rematch in " << l << " second(s)..." << endl << endl;
-				delay(1.0);
-			}
-			cout << "REMATCH!!!"<< endl;
-			delay(1.0);
-			clearConsole();
-			positionRunner[0] = 1;
-			positionRunner[1] = 1;
-			match++;
-			continue;
-		}
-		else if (positionRunner[1] >= finishingLine && positionRunner[0] < finishingLine)
-		{
-			cout << "RUNNER #2 WON THE MATCH!!!" << endl;
-			break;
-		}
-
-		clearConsole();
-	}
-
-	return 0;
 }
