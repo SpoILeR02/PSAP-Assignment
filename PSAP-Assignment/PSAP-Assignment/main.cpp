@@ -5,21 +5,42 @@
 
 using namespace std;
 
-int randomInteger();
+// Declaring functions prototype for later use
+int randomInteger(void);
 int timeElapse(int);
 int runnersAction(int, int);
 int calculatePosition(int, int);
 void delay(float);
-void clearConsole();
+void clearConsole(void);
 void programTitle(int);
 void showPosition(int, int);
 void showTrack(int, int, int);
 void actionMessage(int, int, int, int);
 
+/*
+* Declare two constant where
+* 1. 'finishingLine' is an integer constant equal to value 60.
+* 
+* 2. 'runners' is an integer array constant with size of 2,
+*    storing value 1 and 2 which identify Runner #1 and Runner #2.
+*/
 const int finishingLine = 60;
 const int runners[2] = { 1, 2 };
 
+// The main part of the program
 int main() {
+	/*
+	* Declare 5 variables where
+	* 1. 'match' is an integer variable equal to value.
+	* 
+	* 2. 'randomNumber' and 'actonNumber' are integer array variable
+	*    with size of 2, which currently have no values inside yet.
+	* 
+	* 3. 'positionRunner is an integer array variable with size of 2, storing
+	*    the values 1 which identify the initial location of both runners.
+	* 
+	* 4. 'seconds' is an integer variable equal to value 0.
+	*/
 	int match = 1;
 	int randomNumber[2];
 	int actionNumber[2];
@@ -27,33 +48,126 @@ int main() {
 	int seconds = 0;
 	srand((unsigned)time(NULL));
 
+	/*
+	* 1. Call the function 'programTitle' and pass in
+	*    variable 'match' as a parameter into the function.
+	* 
+	* 2. Call the function 'showTrack' and pass in
+	*    array variables 'positionRunner' index 0 and 1, and 'seconds'
+	*    as parameters into the function.
+	* 
+	* 3. Call the function 'timeElapse' and pass in
+	*    variable 'seconds' as a parameter into the function
+	*    where the variable 'seconds' will be overwritten by
+	*    the value return from the function 'timeElapse'.
+	*/
 	programTitle(match);
 	showTrack(positionRunner[0], positionRunner[1], seconds);
 	seconds = timeElapse(seconds);
+
+	/*
+	* 1. This FOR loop will loop for 3 times
+	*    where integer 'l' is equal to 3 (initial value)
+	*    while 'l' is bigger than or equal to 1
+	*    'l' will decrement by 1.
+	* 
+	* Inside FOR loop:
+	* 2. Display countdown the race 'l' seconds.
+	* 
+	* 3. Call the function 'delay' and pass in
+	*    value 1.0 as a parameter into the function.
+	*/
 	for (int l = 3; l >= 1; l--)
 	{
 		cout << "Countdown... Race starting in " << l << " second(s)..." << endl << endl;
 		delay(1.0);
 	}
+
+	/*
+	* 1. Display the following sentence "BANG..."
+	*    after FOR loop ended.
+	* 
+	* 2. Call the function 'delay' and pass in
+	*    value 1.0 as a parameter into the function.
+	* 
+	* 3. Call the function 'clearConsole'.
+	*/
 	cout << "BANG!!\n\nAND AWAY THEY GO!!!" << endl;
 	delay(1.0);
 	clearConsole();
 
+	// This section loop infinitely
 	while (true)
 	{
+		/*
+		* 1. This FOR loop will loop for twice
+		*    where integer 'i' is equal to 0 (initial value)
+		*    while 'i' is less than or equal to 1
+		*    'i' will increment by 1.
+		* 
+		* Inside FOR Loop:
+		* 2. Call the function 'randomInteger'
+		*    where the array variable 'randomNumber' index 'i' 
+		*    will be overwritten by the value
+		*    return from the function 'randomInteger'.
+		* 
+		* 3. Call the function 'runnersAction' and pass in
+		*    'i' and array variable 'randomNumber' index 'i'
+		*    as parameters into the function
+		*    where the array variable 'actionNumber' index 'i'
+		*    will be overwritten by the value
+		*    return from the function 'runnersAction'.
+		* 
+		* 4. Call the function 'calculatePosition' and pass in
+		*    array variables 'positionRunner' index 'i' and 
+		*    'actionNumber' index 'i' as parameters into the function
+		*    where the array variable 'positionRunner' index 'i'
+		*    will be overwritten by the value
+		*    return from the function 'calculatePosition'.
+		*/
 		for (int i = 0; i <= 1; i++)
 		{
 			randomNumber[i] = randomInteger();
 			actionNumber[i] = runnersAction(i, randomNumber[i]);
 			positionRunner[i] = calculatePosition(positionRunner[i], actionNumber[i]);
 		}
+
+		/*
+		* 1. Call the function 'programTitle' and pass in
+		*    variable 'match' as a parameter into the function.
+		* 
+		* 2. This FOR loop will loop for twice
+		*    where integer 'j' is equal to 0 (initial value)
+		*    while 'j' is less than or equal to 1
+		*    'j' will increment by 1.
+		* 
+		* Inside FOR loop:
+		* 3. Call the function 'actionMessage' and pass in
+		*    array variables 'randomNumber', 'runners',
+		*    'positionRunner' and 'actionNumber'
+		*    where all of them are index 'j'
+		*    as parameters into the function.
+		*/
 		programTitle(match);
 		for (int j = 0; j <= 1; j++)
 		{
 			actionMessage(randomNumber[j], runners[j], positionRunner[j], actionNumber[j]);
 		}
-		showTrack(positionRunner[0], positionRunner[1], seconds);
 
+		/*
+		* 1. Call the function 'showTrack' after FOR loop ended
+		*    and pass in array variables 'positionRunner' index 0 and 1,
+		*    and 'seconds' as parameters into the function.
+		* 
+		* 2. Call the function 'timeElapse' and pass in
+		*    variable 'seconds' as a parameter into the function
+		*    where the variable 'seconds' will be overwritten by
+		*    the value return from the function 'timeElapse'.
+		* 
+		* 3. Call the function 'delay' and pass in
+		*    value 1.0 as a parameter into the function.
+		*/
+		showTrack(positionRunner[0], positionRunner[1], seconds);
 		seconds = timeElapse(seconds);
 		delay(1.0);
 
@@ -90,7 +204,7 @@ int main() {
 	return 0;
 }
 
-int randomInteger() {
+int randomInteger(void) {
 	int randomNumber = (rand() % 10) + 1;
 	return randomNumber;
 }
@@ -103,7 +217,7 @@ void delay(float seconds) {
 	while (clock() < startClock + secondsAhead);
 }
 
-void clearConsole() {
+void clearConsole(void) {
 #if defined _WIN32
 	system("cls");
 #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
