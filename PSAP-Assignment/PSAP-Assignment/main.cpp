@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <string>
 #include <ctime>
 
 using namespace std;
@@ -507,40 +508,66 @@ void programTitle(int match) {
 */
 void actionMessage(int randomNumber, int runner, int runnerPosition, int actionNumber) {
 	cout << "| Runner " << runner << " Rolled Number : " << setw(41) << left << setfill(' ') << randomNumber << '|' << endl;
+
+	string text;
 	switch (actionNumber)
 	{
 	case 1:
-		cout << "| " << setw(66) << left << setfill(' ') << "Runner 1 SPRINTS and move 3 squares ahead." << '|' << endl;
+		text = "Runner 1 SPRINTS and move 3 squares ahead.";
+		cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
 		break;
 	case 2:
-		cout << "| " << setw(66) << left << setfill(' ') << "Runner 1 JOGS and move 1 square ahead." << '|' << endl;
+		text = "Runner 1 JOGS and move 1 square ahead.";
+		cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
 		break;
 	case 3:
 		if (runnerPosition == 1)
-			cout << "| " << setw(66) << left << setfill(' ') << "Runner 1 WALKS and return to starting point." << '|' << endl;
+		{
+			text = "Runner 1 WALKS and return to starting point.";
+			cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
+		}
 		else
-			cout << "| " << setw(66) << left << setfill(' ') << "Runner 1 WALKS and move 6 squares behind." << '|' << endl;
+		{
+			text = "Runner 1 WALKS and move 6 squares behind.";
+			cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
+		}
 		break;
 	case 4:
-		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 FAST SPRINTS and move 5 squares ahead." << '|' << endl;
+		text = "Runner 2 FAST SPRINTS and move 5 squares ahead.";
+		cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
 		break;
 	case 5:
-		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 RUNS and move 3 squares ahead." << '|' << endl;
+		text = "Runner 2 RUNS and move 3 squares ahead.";
+		cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
 		break;
 	case 6:
 		if (runnerPosition == 1)
-			cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 WALKS and return to starting point." << '|' << endl;
+		{
+			text = "Runner 2 WALKS and return to starting point.";
+			cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
+		}
 		else
-			cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 WALKS and move 2 squares behind." << '|' << endl;
+		{
+			text = "Runner 2 WALKS and move 2 squares behind.";
+			cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;;
+		}
 		break;
 	case 7:
 		if (runnerPosition == 1)
-			cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 CRAWLS and return to starting point." << '|' << endl;
+		{
+			text = "Runner 2 CRAWLS and return to starting point.";
+			cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
+		}
 		else
-			cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 CRAWLS and move 4 squares behind." << '|' << endl;
+		{
+			text = "Runner 2 CRAWLS and move 4 squares behind.";
+			cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
+		}
 		break;
-	default:
-		cout << "| " << setw(66) << left << setfill(' ') << "Runner 2 SLEEPS and nothing happens." << '|' << endl;
+	case 8:
+		text = "Runner 2 SLEEPS and nothing happens.";
+		cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
+		break;
 	}
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 }
