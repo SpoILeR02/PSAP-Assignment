@@ -50,7 +50,7 @@ int main() {
 	cout << "BANG!!\n\nAND AWAY THEY GO!!!" << endl;
 	delay(1.0);
 	clearConsole();
-	// End of SECTION 1
+	// End of SECTION 1 of Main
 
 	/*
 	* SECTION 2 of Main:
@@ -84,6 +84,8 @@ int main() {
 		if (positionRunner[0] >= finishingLine && positionRunner[1] < finishingLine)
 		{
 			cout << "RUNNER #1 WON THE MATCH!!!" << endl;
+
+			// Stop the infinite WHILE loop
 			break;
 		}
 		else if (positionRunner[0] >= finishingLine && positionRunner[1] >= finishingLine)
@@ -100,13 +102,18 @@ int main() {
 			delay(1.0);
 			positionRunner[0] = 1;
 			positionRunner[1] = 1;
+			
+			// The variable 'match' increment by 1
 			match++;
 		}
 		else if (positionRunner[1] >= finishingLine && positionRunner[0] < finishingLine)
 		{
 			cout << "RUNNER #2 WON THE MATCH!!!" << endl;
+
+			// Stop the infinite WHILE loop
 			break;
 		}
+		// End of SECTION 2 of Main
 
 		clearConsole();
 	}
@@ -122,12 +129,12 @@ int main() {
 int randomInteger(void) {
 	/*
 	* Generate an integer number between 1 to 10,
-	* store the generated number into the variable 'randomNumber'
+	* store the generated number into the local variable 'random_integer'
 	*/
-	int randomNumber = (rand() % 10) + 1;
+	int random_integer = (rand() % 10) + 1;
 
-	// Return 'randomNumber' as the function value
-	return randomNumber;
+	// Return 'random_integer' as the function value
+	return random_integer;
 }
 
 /*
@@ -135,10 +142,14 @@ int randomInteger(void) {
 * receive a float-type argument, 'delay_seconds' into this function
 */
 void delay(float delay_seconds) {
-	// Store current processor time into the variable 'startClock'
+	// Store current processor time into the local variable 'startClock'
 	clock_t startClock = clock();
 
-		
+	/*
+	* Multiplying the received argument with
+	* a Defined Macro found in <ctime> library,
+	* store the result into the local variable 'secondsAhead'
+	*/
 	float secondsAhead = delay_seconds * CLOCKS_PER_SEC;
 
 	// Do nothing until the elapsed time passed
@@ -163,71 +174,71 @@ void clearConsole(void) {
 }
 
 
-int runnersAction(int verifyRunner, int randomNumber) {
-	// local variable 'actionNumber' is declared as an integer variable
-	int actionNumber;
+int runnersAction(int verify_runner, int random_integer) {
+	// local variable 'number_action' is declared as an integer variable
+	int number_action;
 
 
-	if (verifyRunner == 0) {
-		if (randomNumber >= 1 && randomNumber <= 5)
-			actionNumber = 1;
-		else if (randomNumber >= 6 && randomNumber <= 7)
-			actionNumber = 2;
+	if (verify_runner == 0) {
+		if (random_integer >= 1 && random_integer <= 5)
+			number_action = 1;
+		else if (random_integer >= 6 && random_integer <= 7)
+			number_action = 2;
 		else
-			actionNumber = 3;
+			number_action = 3;
 	}
 
 
 	else
 	{
-		if (randomNumber >= 1 && randomNumber <= 3)
-			actionNumber = 4;
-		else if (randomNumber >= 4 && randomNumber <= 5)
-			actionNumber = 5;
-		else if (randomNumber == 6)
-			actionNumber = 6;
-		else if (randomNumber >= 7 && randomNumber <= 8)
-			actionNumber = 7;
+		if (random_integer >= 1 && random_integer <= 3)
+			number_action = 4;
+		else if (random_integer >= 4 && random_integer <= 5)
+			number_action = 5;
+		else if (random_integer == 6)
+			number_action = 6;
+		else if (random_integer >= 7 && random_integer <= 8)
+			number_action = 7;
 		else
-			actionNumber = 8;
+			number_action = 8;
 	}
 
-	// return 'actionNumber' as the function value
-	return actionNumber;
+	// return 'number_action' as the function value
+	return number_action;
 }
 
 
-int calculatePosition(int runnerPosition, int actionNumber) {
+int calculatePosition(int location_runner, int number_action) {
 
-	switch (actionNumber)
+	switch (number_action)
 	{
 	case 1:
 		// 'runnerPosition' is equal to 'runnerPosition' + 3
-		runnerPosition += 3;
+		location_runner += 3;
 		break;
 	case 2:
 		// 'runnerPosition' is equal to 'runnerPosition' + 1
-		runnerPosition += 1;
+		location_runner += 1;
 		break;
 	case 3:
 		// 'runnerPosition' is equal to 'runnerPosition' - 6
-		runnerPosition -= 6;
+		location_runner -= 6;
 		break;
 	case 4:
 		// 'runnerPosition' is equal to 'runnerPosition' + 5
-		runnerPosition += 5;
+		location_runner += 5;
 		break;
 	case 5:
 		// 'runnerPosition' is equal to 'runnerPosition' + 3
-		runnerPosition += 3;
+		location_runner += 3;
 		break;
 	case 6:
 		// 'runnerPosition' is equal to 'runnerPosition' - 2
-		runnerPosition -= 2;
+		location_runner -= 2;
 		break;
 	case 7:
 		// 'runnerPosition' is equal to 'runnerPosition' - 4
-		runnerPosition -= 4;
+		location_runner -= 4;
 		break;
 	case 8:
 		// Do nothing, 'runnerPosition' remain the same value
@@ -235,28 +246,28 @@ int calculatePosition(int runnerPosition, int actionNumber) {
 	}
 	
 	
-	if (runnerPosition < 1)
-		runnerPosition = 1;
+	if (location_runner < 1)
+		location_runner = 1;
 	
 	// return 'runnerPosition' as the function value
-	return runnerPosition;
+	return location_runner;
 }
 
 
-void programTitle(int match) {
+void programTitle(int match_num) {
 
 	cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl;
 	cout << '|' << setw(42) << right << setfill(' ') << "TRACK & FIELD RACE" << setw(26) << '|' << endl;
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
-	cout << "| Match No. " << setw(56) << left << setfill(' ') << match << '|' << endl;
+	cout << "| Match No. " << setw(56) << left << setfill(' ') << match_num << '|' << endl;
 }
 
 
-void actionMessage(int randomNumber, int runner, int runnerPosition, int actionNumber) {
-	cout << "| Runner " << runner << " Rolled Number : " << setw(41) << left << setfill(' ') << randomNumber << '|' << endl;
+void actionMessage(int random_integer, int identify_runner, int location_runner, int number_action) {
+	cout << "| Runner " << identify_runner << " Rolled Number : " << setw(41) << left << setfill(' ') << random_integer << '|' << endl;
 
 	string text;
-	switch (actionNumber)
+	switch (number_action)
 	{
 	case 1:
 		text = "Runner 1 SPRINTS and move 3 squares ahead.";
@@ -265,7 +276,7 @@ void actionMessage(int randomNumber, int runner, int runnerPosition, int actionN
 		text = "Runner 1 JOGS and move 1 square ahead.";
 		break;
 	case 3:
-		if (runnerPosition == 1)
+		if (location_runner == 1)
 			text = "Runner 1 WALKS and return to starting point.";
 		else
 			text = "Runner 1 WALKS and move 6 squares behind.";
@@ -277,13 +288,13 @@ void actionMessage(int randomNumber, int runner, int runnerPosition, int actionN
 		text = "Runner 2 RUNS and move 3 squares ahead.";
 		break;
 	case 6:
-		if (runnerPosition == 1)
+		if (location_runner == 1)
 			text = "Runner 2 WALKS and return to starting point.";
 		else
 			text = "Runner 2 WALKS and move 2 squares behind.";
 		break;
 	case 7:
-		if (runnerPosition == 1)
+		if (location_runner == 1)
 			text = "Runner 2 CRAWLS and return to starting point.";
 		else
 			text = "Runner 2 CRAWLS and move 4 squares behind.";
@@ -297,34 +308,34 @@ void actionMessage(int randomNumber, int runner, int runnerPosition, int actionN
 }
 
 
-void showPosition(int runnerPosition, int runner) {
+void showPosition(int location_runner, int identify_runner) {
 	
-	if (runnerPosition < finishingLine)
-		cout << "| " << setw(runnerPosition) << right << setfill(' ') << runner << setw(60 - runnerPosition) << '|' << setw(7) << " |" << endl;
-	else if (runnerPosition == finishingLine)
-		cout << "| " << setw(60) << right << setfill(' ') << runner << setw(5) << ' ' << " |" << endl;
+	if (location_runner < finishingLine)
+		cout << "| " << setw(location_runner) << right << setfill(' ') << identify_runner << setw(60 - location_runner) << '|' << setw(7) << " |" << endl;
+	else if (location_runner == finishingLine)
+		cout << "| " << setw(60) << right << setfill(' ') << identify_runner << setw(5) << ' ' << " |" << endl;
 	else
-		cout << "| " << setw(60) << right << setfill(' ') << '|' << setw(abs(60 - runnerPosition)) << runner << setw(67 - runnerPosition) << " |" << endl;
+		cout << "| " << setw(60) << right << setfill(' ') << '|' << setw(abs(60 - location_runner)) << identify_runner << setw(67 - location_runner) << " |" << endl;
 }
 
 
-void showTrack(int positionRunnerOne, int positionRunnerTwo, int seconds) {
+void showTrack(int location_runnerOne, int location_runnerTwo, int elapsed_seconds) {
 	
-	cout << "| Runner #" << runners[0] << " Current Position: " << setw(38) << left << setfill(' ') << positionRunnerOne << '|' << endl;
-	cout << "| Runner #" << runners[1] << " Current Position: " << setw(38) << left << setfill(' ') << positionRunnerTwo << '|' << endl;
+	cout << "| Runner #" << runners[0] << " Current Position: " << setw(38) << left << setfill(' ') << location_runnerOne << '|' << endl;
+	cout << "| Runner #" << runners[1] << " Current Position: " << setw(38) << left << setfill(' ') << location_runnerTwo << '|' << endl;
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 	cout << '|' << setw(67) << left << setfill(' ') << " Track:" << '|' << endl;
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 
 	
-	showPosition(positionRunnerOne, runners[0]);
+	showPosition(location_runnerOne, runners[0]);
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
-	showPosition(positionRunnerTwo, runners[1]);
+	showPosition(location_runnerTwo, runners[1]);
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 	
 	
-	if (positionRunnerOne == positionRunnerTwo && seconds > 1)
+	if (location_runnerOne == location_runnerTwo && elapsed_seconds > 1)
 	{
 		cout << "| " << setw(66) << left << setfill(' ') << "GOTCHA!!! Both runners clash together!" << '|' << endl;
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
@@ -332,12 +343,12 @@ void showTrack(int positionRunnerOne, int positionRunnerTwo, int seconds) {
 }
 
 
-int timeElapse(int seconds) {
+int timeElapse(int elapsed_seconds) {
 	
-	cout << "| Time Elapsed(s): " << setw(49) << left << setfill(' ') << seconds << '|' << endl;
+	cout << "| Time Elapsed(s): " << setw(49) << left << setfill(' ') << elapsed_seconds << '|' << endl;
 	cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl << endl;
-	seconds++;
+	elapsed_seconds++;
 
-	// return 'seconds' as the function value
-	return seconds;
+	// return 'elapsed_seconds' as the function value
+	return elapsed_seconds;
 }
