@@ -30,6 +30,8 @@ int main() {
 	int actionNumber[2];
 	int positionRunner[2] = { 1, 1 };
 	int seconds = 0;
+
+	// Create starting seed for pseudorandom number series and use the time as seed
 	srand((unsigned)time(NULL));
 
 	/*
