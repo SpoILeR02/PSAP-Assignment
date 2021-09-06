@@ -63,7 +63,7 @@ int main() {
 		{
 			// Overwrite the values of variables with the values return from functions
 			randomNumber[i] = randomInteger();
-			actionNumber[i] = runnersAction(i, randomNumber[i]);
+			actionNumber[i] = runnersAction(i + 1, randomNumber[i]);
 			positionRunner[i] = calculatePosition(positionRunner[i], actionNumber[i]);
 		}
 
@@ -123,8 +123,7 @@ int main() {
 
 /*
 * Declare 'randomInteger' as an integer return-type function
-* there is no argument will be pass into this function
-* therefore argument-type void is used inside parentheses
+* no argument will be pass into this function
 */
 int randomInteger(void) {
 	/*
@@ -156,30 +155,37 @@ void delay(float delay_seconds) {
 	while (clock() < startClock + secondsAhead);
 }
 
-
+/*
+* Declare 'clearConsole' as a void return-type function
+* no argument will be pass into this function
+*/
 // This function is used to clear the screen of terminal
 void clearConsole(void) {
+	#if defined (__APPLE__)
+	// Pass the command "clear" if user run program on macOS
+		system("clear");
 
-	#if defined _WIN32
+	#elif defined _WIN32
+	// Pass the command "cls" if user run program on WIINDOWS
 		system("cls");
 
-
 	#elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
+	// Pass the command "clear" if user run program on LINUX
 		system("clear");
 
-
-	#elif defined (__APPLE__)
-		system("clear");
 	#endif
 }
 
-
+/*
+* Declare 'runnersAction' as an integer return-type function
+* receive 2 integer arguments into this function
+*/
 int runnersAction(int verify_runner, int random_integer) {
-	// local variable 'number_action' is declared as an integer variable
+	// Declared local variable 'number_action' as an integer variable
 	int number_action;
 
-
-	if (verify_runner == 0) {
+	// Different actions given to Runner #1, based on the range given
+	if (verify_runner == 1) {
 		if (random_integer >= 1 && random_integer <= 5)
 			number_action = 1;
 		else if (random_integer >= 6 && random_integer <= 7)
@@ -188,7 +194,7 @@ int runnersAction(int verify_runner, int random_integer) {
 			number_action = 3;
 	}
 
-
+	// Different actions given to Runner #2, based on the range given
 	else
 	{
 		if (random_integer >= 1 && random_integer <= 3)
@@ -207,45 +213,48 @@ int runnersAction(int verify_runner, int random_integer) {
 	return number_action;
 }
 
-
+/*
+* Declare 'calculatePosition' as an integer return-type function
+* receive 2 integer arguments into this function
+*/
 int calculatePosition(int location_runner, int number_action) {
-
+	// Calculate 'location_runner', based on 'number_action'
 	switch (number_action)
 	{
 	case 1:
-		// 'runnerPosition' is equal to 'runnerPosition' + 3
 		location_runner += 3;
 		break;
+
 	case 2:
-		// 'runnerPosition' is equal to 'runnerPosition' + 1
 		location_runner += 1;
 		break;
+
 	case 3:
-		// 'runnerPosition' is equal to 'runnerPosition' - 6
 		location_runner -= 6;
 		break;
+
 	case 4:
-		// 'runnerPosition' is equal to 'runnerPosition' + 5
 		location_runner += 5;
 		break;
+
 	case 5:
-		// 'runnerPosition' is equal to 'runnerPosition' + 3
 		location_runner += 3;
 		break;
+
 	case 6:
-		// 'runnerPosition' is equal to 'runnerPosition' - 2
 		location_runner -= 2;
 		break;
+
 	case 7:
-		// 'runnerPosition' is equal to 'runnerPosition' - 4
 		location_runner -= 4;
 		break;
+
 	case 8:
 		// Do nothing, 'runnerPosition' remain the same value
 		break;
 	}
 	
-	
+	// Overwrite the value of 'location_runner' into 1, if it is less than 1
 	if (location_runner < 1)
 		location_runner = 1;
 	
@@ -253,63 +262,83 @@ int calculatePosition(int location_runner, int number_action) {
 	return location_runner;
 }
 
-
+/*
+* Declare 'calculatePosition' as a void return-type function
+* receive an integer arguments, 'match_num' into this function
+*/
 void programTitle(int match_num) {
-
 	cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl;
 	cout << '|' << setw(42) << right << setfill(' ') << "TRACK & FIELD RACE" << setw(26) << '|' << endl;
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 	cout << "| Match No. " << setw(56) << left << setfill(' ') << match_num << '|' << endl;
 }
 
-
+/*
+* Declare 'actionMessage' as a void return-type function
+* receive 4 integer arguments into this function
+*/
 void actionMessage(int random_integer, int identify_runner, int location_runner, int number_action) {
 	cout << "| Runner " << identify_runner << " Rolled Number : " << setw(41) << left << setfill(' ') << random_integer << '|' << endl;
 
+	// Declared local variable 'text' as a string variable
 	string text;
+
+	// Initialize string value, based on 'number_action'
 	switch (number_action)
 	{
 	case 1:
 		text = "Runner 1 SPRINTS and move 3 squares ahead.";
 		break;
+
 	case 2:
 		text = "Runner 1 JOGS and move 1 square ahead.";
 		break;
+
 	case 3:
 		if (location_runner == 1)
 			text = "Runner 1 WALKS and return to starting point.";
 		else
 			text = "Runner 1 WALKS and move 6 squares behind.";
 		break;
+
 	case 4:
 		text = "Runner 2 FAST SPRINTS and move 5 squares ahead.";
 		break;
+
 	case 5:
 		text = "Runner 2 RUNS and move 3 squares ahead.";
 		break;
+
 	case 6:
 		if (location_runner == 1)
 			text = "Runner 2 WALKS and return to starting point.";
 		else
 			text = "Runner 2 WALKS and move 2 squares behind.";
 		break;
+
 	case 7:
 		if (location_runner == 1)
 			text = "Runner 2 CRAWLS and return to starting point.";
 		else
 			text = "Runner 2 CRAWLS and move 4 squares behind.";
 		break;
+
 	case 8:
 		text = "Runner 2 SLEEPS and nothing happens.";
 		break;
 	}
+
+	// Display the variable 'text'
 	cout << "| " << setw(66) << left << setfill(' ') << text << '|' << endl;
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 }
 
-
+/*
+* Declare 'actionMessage' as a void return-type function
+* receive 2 integer arguments into this function
+*/
 void showPosition(int location_runner, int identify_runner) {
-	
+	// Display appropriate output based on different conditions
 	if (location_runner < finishingLine)
 		cout << "| " << setw(location_runner) << right << setfill(' ') << identify_runner << setw(60 - location_runner) << '|' << setw(7) << " |" << endl;
 	else if (location_runner == finishingLine)
@@ -318,23 +347,26 @@ void showPosition(int location_runner, int identify_runner) {
 		cout << "| " << setw(60) << right << setfill(' ') << '|' << setw(abs(60 - location_runner)) << identify_runner << setw(67 - location_runner) << " |" << endl;
 }
 
-
+/*
+* Declare 'showTrack' as a void return-type function
+* receive 3 integer arguments into this function
+*/
 void showTrack(int location_runnerOne, int location_runnerTwo, int elapsed_seconds) {
-	
+	// Show the current position of two runners in word form
 	cout << "| Runner #" << runners[0] << " Current Position: " << setw(38) << left << setfill(' ') << location_runnerOne << '|' << endl;
 	cout << "| Runner #" << runners[1] << " Current Position: " << setw(38) << left << setfill(' ') << location_runnerTwo << '|' << endl;
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 	cout << '|' << setw(67) << left << setfill(' ') << " Track:" << '|' << endl;
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 
-	
+	// Show the current position of two runners in graphical form
 	showPosition(location_runnerOne, runners[0]);
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 	showPosition(location_runnerTwo, runners[1]);
 	cout << "| " << setw(60) << right << setfill('-') << '|' << setw(5) << '-' << " |" << endl;
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 	
-	
+	// Display a message if both runners clash on the same position
 	if (location_runnerOne == location_runnerTwo && elapsed_seconds > 1)
 	{
 		cout << "| " << setw(66) << left << setfill(' ') << "GOTCHA!!! Both runners clash together!" << '|' << endl;
@@ -342,11 +374,16 @@ void showTrack(int location_runnerOne, int location_runnerTwo, int elapsed_secon
 	}
 }
 
-
+/*
+* Declare 'timeElapse' as a void return-type function
+* receive an integer arguments, 'elapsed_seconds' into this function
+*/
 int timeElapse(int elapsed_seconds) {
-	
+	// Display the time elapsed during the program runs
 	cout << "| Time Elapsed(s): " << setw(49) << left << setfill(' ') << elapsed_seconds << '|' << endl;
 	cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl << endl;
+
+	// The variable 'elapsed_seconds' increment by 1
 	elapsed_seconds++;
 
 	// return 'elapsed_seconds' as the function value
