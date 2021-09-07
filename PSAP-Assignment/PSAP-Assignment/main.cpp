@@ -69,8 +69,8 @@ int main() {
 			positionRunner[i] = calculatePosition(positionRunner[i], actionNumber[i]);
 		}
 
-		// Loop for twice
 		programTitle(match);
+		// Loop for twice
 		for (int j = 0; j < 2; j++)
 		{
 			// Call and pass in different arguments into the function 'actionMessage'
