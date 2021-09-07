@@ -32,7 +32,7 @@ int main() {
 	int seconds = 0;
 
 	// Create starting seed for pseudorandom number series and use the time as seed
-	srand((unsigned)time(NULL));
+	srand(time(NULL));
 
 	/*
 	* SECTION 1 of Main:
