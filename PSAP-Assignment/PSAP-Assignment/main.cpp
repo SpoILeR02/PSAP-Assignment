@@ -90,6 +90,13 @@ int main() {
 			// Stop the infinite WHILE loop
 			break;
 		}
+		else if (positionRunner[1] >= finishingLine && positionRunner[0] < finishingLine)
+		{
+			cout << "RUNNER #2 WON THE MATCH!!!" << endl;
+
+			// Stop the infinite WHILE loop
+			break;
+		}
 		else if (positionRunner[0] >= finishingLine && positionRunner[1] >= finishingLine)
 		{
 			cout << "IT'S A TIE!\n" << endl;
@@ -104,16 +111,9 @@ int main() {
 			delay(1.0);
 			positionRunner[0] = 1;
 			positionRunner[1] = 1;
-			
+
 			// The variable 'match' increment by 1
 			match++;
-		}
-		else if (positionRunner[1] >= finishingLine && positionRunner[0] < finishingLine)
-		{
-			cout << "RUNNER #2 WON THE MATCH!!!" << endl;
-
-			// Stop the infinite WHILE loop
-			break;
 		}
 		// End of SECTION 2 of Main
 
