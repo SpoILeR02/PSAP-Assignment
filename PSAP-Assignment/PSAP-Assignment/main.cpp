@@ -342,11 +342,11 @@ void actionMessage(int random_integer, int identify_runner, int location_runner,
 void showPosition(int location_runner, int identify_runner) {
 	// Display appropriate output based on different conditions
 	if (location_runner < finishingLine)
-		cout << "| " << setw(location_runner) << right << setfill(' ') << identify_runner << setw(60 - location_runner) << '|' << setw(7) << " |" << endl;
+		cout << "| " << setw(location_runner) << right << setfill(' ') << identify_runner << setw(finishingLine - location_runner) << '|' << setw(7) << " |" << endl;
 	else if (location_runner == finishingLine)
-		cout << "| " << setw(60) << right << setfill(' ') << identify_runner << setw(5) << ' ' << " |" << endl;
+		cout << "| " << setw(finishingLine) << right << setfill(' ') << identify_runner << setw(5) << ' ' << " |" << endl;
 	else
-		cout << "| " << setw(60) << right << setfill(' ') << '|' << setw(abs(60 - location_runner)) << identify_runner << setw(67 - location_runner) << " |" << endl;
+		cout << "| " << setw(finishingLine) << right << setfill(' ') << '|' << setw(location_runner - finishingLine) << identify_runner << setw(67 - location_runner) << " |" << endl;
 }
 
 /*
@@ -369,7 +369,7 @@ void showTrack(int location_runnerOne, int location_runnerTwo, int elapsed_secon
 	cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
 	
 	// Display a message if both runners clash on the same position
-	if (location_runnerOne == location_runnerTwo && elapsed_seconds > 1)
+	if (location_runnerOne == location_runnerTwo && elapsed_seconds > 0)
 	{
 		cout << "| " << setw(66) << left << setfill(' ') << "GOTCHA!!! Both runners clash together!" << '|' << endl;
 		cout << '|' << setw(67) << left << setfill('=') << '=' << '|' << endl;
