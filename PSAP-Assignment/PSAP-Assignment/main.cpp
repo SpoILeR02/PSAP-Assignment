@@ -264,7 +264,7 @@ int calculatePosition(int location_runner, int number_action) {
 
 /*
 * Declare 'calculatePosition' as a void return-type function
-* receive an integer arguments, 'match_num' into this function
+* receive an integer argument, 'match_num' into this function
 */
 void programTitle(int match_num) {
 	cout << ' ' << setw(67) << left << setfill('=') << '=' << ' ' << endl;
@@ -375,8 +375,8 @@ void showTrack(int location_runnerOne, int location_runnerTwo, int elapsed_secon
 }
 
 /*
-* Declare 'timeElapse' as a void return-type function
-* receive an integer arguments, 'elapsed_seconds' into this function
+* Declare 'timeElapse' as a integer return-type function
+* receive an integer argument, 'elapsed_seconds' into this function
 */
 int timeElapse(int elapsed_seconds) {
 	// Display the time elapsed during the program runs
