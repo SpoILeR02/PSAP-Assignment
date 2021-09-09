@@ -225,6 +225,7 @@ int calculatePosition(int location_runner, int number_action) {
 	switch (number_action)
 	{
 	case 1:
+	case 5:
 		location_runner += 3;
 		break;
 
@@ -238,10 +239,6 @@ int calculatePosition(int location_runner, int number_action) {
 
 	case 4:
 		location_runner += 5;
-		break;
-
-	case 5:
-		location_runner += 3;
 		break;
 
 	case 6:
