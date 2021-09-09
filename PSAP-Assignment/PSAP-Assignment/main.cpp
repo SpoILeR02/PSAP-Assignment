@@ -334,7 +334,7 @@ void actionMessage(int random_integer, int identify_runner, int location_runner,
 }
 
 /*
-* Declare 'actionMessage' as a void return-type function
+* Declare 'showPosition' as a void return-type function
 * receive 2 integer arguments into this function
 */
 void showPosition(int location_runner, int identify_runner) {
