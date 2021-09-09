@@ -18,9 +18,10 @@ void showPosition(int, int);
 void showTrack(int, int, int);
 int timeElapse(int);
 
-// Declare and initialize values for 2 constants
+// Declare and initialize values for 3 constants
 const int finishingLine = 60;
 const int runners[2] = { 1, 2 };
+const float oneSec = 1.0;
 
 // Main function of the program
 int main() {
@@ -46,11 +47,11 @@ int main() {
 	for (int l = 3; l >= 1; l--)
 	{
 		cout << "Countdown... Race starting in " << l << " second(s)...\n" << endl;
-		delay(1.0);
+		delay(oneSec);
 	}
 
 	cout << "BANG!!\n\nAND AWAY THEY GO!!!" << endl;
-	delay(1.0);
+	delay(oneSec);
 	clearConsole();
 	// End of SECTION 1 of Main
 
@@ -80,7 +81,7 @@ int main() {
 		// Call and pass in different arguments into the functions
 		showTrack(positionRunner[0], positionRunner[1], seconds);
 		seconds = timeElapse(seconds);
-		delay(1.0);
+		delay(oneSec);
 		
 		// ELSE-IF statements which execute different actions based on the conditions
 		if (positionRunner[0] >= finishingLine && positionRunner[1] < finishingLine)
@@ -105,10 +106,10 @@ int main() {
 			for (int k = 3; k >= 1; k--)
 			{
 				cout << "Countdown... Rematch in " << k << " second(s)...\n" << endl;
-				delay(1.0);
+				delay(oneSec);
 			}
 			cout << "REMATCH!!!" << endl;
-			delay(1.0);
+			delay(oneSec);
 			positionRunner[0] = 1;
 			positionRunner[1] = 1;
 
