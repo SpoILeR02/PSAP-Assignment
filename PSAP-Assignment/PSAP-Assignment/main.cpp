@@ -83,7 +83,7 @@ int main() {
 		seconds = timeElapse(seconds);
 		delay(oneSec);
 		
-		// ELSE-IF statements which execute different actions based on the conditions
+		// IF-ELSE-IF statements which execute different actions based on the conditions
 		if (positionRunner[0] >= finishingLine && positionRunner[1] < finishingLine)
 		{
 			cout << "RUNNER #1 WON THE MATCH!!!" << endl;
