@@ -132,6 +132,7 @@ int randomInteger(void) {
 	/*
 	* Generate an integer number between 1 to 10,
 	* store the generated number into the local variable 'random_integer'
+	* FORMULAE: rand() % (max + 1 - min) + min
 	*/
 	int random_integer = (rand() % 10) + 1;
 
